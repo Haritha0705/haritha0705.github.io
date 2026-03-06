@@ -91,7 +91,9 @@ export default function StatusBadge({ status, label }: StatusBadgeProps) {
                 sx={{
                     fontFamily: 'monospace',
                     fontSize: '0.75rem',
-                    color: theme.custom.gradients.text,
+                    background: theme.custom.gradients.text,
+                    WebkitBackgroundClip: 'text',
+                    WebkitTextFillColor: 'transparent',
                     whiteSpace: 'nowrap',
                 }}
             >

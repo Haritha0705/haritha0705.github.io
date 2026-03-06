@@ -55,7 +55,7 @@ export default function About() {
                     <Typography
                         sx={{
                             fontSize: { xs: 14, sm: 16 },
-                            color: theme.custom.gradients.text,
+                            color: theme.palette.text.secondary,
                         }}
                     >
                         Get to know more about who I am and what I do
@@ -126,7 +126,7 @@ export default function About() {
                                             </Typography>
                                             <Typography
                                                 fontSize={{ xs: 10, sm: 12 }}
-                                                sx={{ color: theme.custom.gradients.text }}
+                                                sx={{ color: theme.palette.text.secondary }}
                                             >
                                                 {stat.label}
                                             </Typography>
@@ -150,7 +150,7 @@ export default function About() {
                                 fontWeight={700}
                                 mb={{ xs: 2, sm: 3 }}
                                 sx={{
-                                    color: theme.custom.gradients.text,
+                                    color: theme.palette.text.primary,
                                     fontSize: { xs: '1rem', sm: '1.25rem', md: '1.5rem' },
                                 }}
                             >
@@ -163,7 +163,7 @@ export default function About() {
                                     'I specialize in full-stack development with React, Node.js, and TypeScript.',
                                     'I believe in continuous learning and staying ahead of technology trends.',
                                 ].map((text, i) => (
-                                    <Typography key={i} sx={{ color: theme.custom.gradients.text, fontSize: { xs: 13, sm: 14, md: 16 } }}>
+                                    <Typography key={i} sx={{ color: theme.palette.text.secondary, fontSize: { xs: 13, sm: 14, md: 16 } }}>
                                         {text}
                                     </Typography>
                                 ))}
@@ -172,7 +172,7 @@ export default function About() {
                             <Typography
                                 fontWeight={600}
                                 mb={2}
-                                sx={{ color: theme.custom.gradients.text }}
+                                sx={{ color: theme.palette.text.primary }}
                             >
                                 Core Competencies
                             </Typography>
@@ -191,8 +191,8 @@ export default function About() {
                                             label={skill}
                                             variant="outlined"
                                             sx={{
-                                                borderColor: theme.custom.gradients.text,
-                                                color: theme.custom.gradients.text,
+                                                borderColor: theme.palette.divider,
+                                                color: theme.palette.text.primary,
                                                 backgroundColor: theme.palette.background.paper,
                                                 '&:hover': {
                                                     backgroundColor: theme.palette.action.hover,

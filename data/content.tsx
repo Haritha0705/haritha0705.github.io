@@ -15,7 +15,6 @@ import LocationOnIcon from "@mui/icons-material/LocationOn";
 import { Code, Mail, Person, Terminal, Work } from "@mui/icons-material";
 import WorkIcon from '@mui/icons-material/Work';
 import SchoolIcon from '@mui/icons-material/School';
-import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
 import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
 
 // Hero Page Data and interfaces
@@ -425,7 +424,7 @@ export interface FooterLink {
     href: string;
 }
 
-export interface SocialLink {
+export interface SocialLinkFooter {
     icon: React.ElementType;
     href: string;
     label: string;
@@ -440,7 +439,7 @@ export const footerLinks: FooterLink[] = [
     { label: 'Contact', href: '#contact' },
 ];
 
-export const socialLinksFooter: SocialLink[] = [
+export const socialLinksFooter: SocialLinkFooter[] = [
     { icon: GitHubIcon, href: 'https://github.com', label: 'GitHub' },
     { icon: LinkedInIcon, href: 'https://linkedin.com', label: 'LinkedIn' },
     { icon: TwitterIcon, href: 'https://twitter.com', label: 'Twitter' },

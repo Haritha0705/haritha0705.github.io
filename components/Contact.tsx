@@ -74,7 +74,7 @@ export default function Contact() {
         <Box
             component="section"
             id="contact"
-            py={10}
+            py={{ xs: 6, sm: 8, md: 10 }}
             bgcolor={theme.palette.background.default}
         >
             <Container maxWidth="lg">
@@ -83,7 +83,7 @@ export default function Contact() {
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    sx={{ textAlign: 'center', mb: 8 }}
+                    sx={{ textAlign: 'center', mb: { xs: 4, sm: 6, md: 8 } }}
                 >
                     <Typography
                         variant="h4"
@@ -104,7 +104,7 @@ export default function Contact() {
                 <Box
                     display="grid"
                     gridTemplateColumns={{ xs: '1fr', md: '1fr 1fr' }}
-                    gap={6}
+                    gap={{ xs: 4, sm: 5, md: 6 }}
                 >
                     {/* Left */}
                     <MotionBox
@@ -220,7 +220,6 @@ export default function Contact() {
                                 <TextField
                                     label="Message"
                                     name="message"
-                                    type="textarea"
                                     value={formData.message}
                                     onChange={handleChange}
                                     required

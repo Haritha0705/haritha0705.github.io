@@ -79,8 +79,9 @@ export default function Hero() {
                 position: 'relative',
                 overflow: 'hidden',
                 backgroundColor: theme.palette.background.default,
-                px: { xs: 2, sm: 4 },
-                py: { xs: 4 },
+                px: { xs: 2.5, sm: 4 },
+                pt: { xs: 10, sm: 4 },
+                pb: { xs: 6, sm: 4 },
             }}
         >
             {/* ---------------- Matrix Background ---------------- */}
@@ -90,9 +91,9 @@ export default function Hero() {
                         position: 'absolute',
                         inset: 0,
                         pointerEvents: 'none',
-                        opacity: theme.matrixOpacity,
+                        opacity: { xs: theme.matrixOpacity * 0.5, sm: theme.matrixOpacity },
                         fontFamily: 'monospace',
-                        fontSize: { xs: '0.55rem', sm: '0.75rem', md: '0.875rem' },
+                        fontSize: { xs: '0.5rem', sm: '0.75rem', md: '0.875rem' },
                     }}
                 >
                     {BINARY_STRINGS.map((binary, i) => (
@@ -100,7 +101,7 @@ export default function Hero() {
                             key={i}
                             sx={{
                                 position: 'absolute',
-                                left: { xs: i * 50, sm: i * 80 },
+                                left: { xs: `${(i / BINARY_STRINGS.length) * 100}%`, sm: i * 80 },
                                 color: theme.palette.primary.main,
                             }}
                             initial={{ y: -100 }}
@@ -126,7 +127,7 @@ export default function Hero() {
                     pointerEvents: 'none',
                     opacity: 0.1,
                     backgroundImage: `radial-gradient(circle, ${theme.palette.primary.main} 1px, transparent 1px)`,
-                    backgroundSize: { xs: '20px 20px', sm: '30px 30px', md: '40px 40px' },
+                    backgroundSize: { xs: '24px 24px', sm: '30px 30px', md: '40px 40px' },
                 }}
             />
 
@@ -138,14 +139,14 @@ export default function Hero() {
                     position: 'relative',
                     zIndex: 10,
                     width: '100%',
-                    py: { xs: 6, sm: 8, md: 12 },
+                    py: { xs: 4, sm: 8, md: 12 },
                 }}
             >
                 <Box
                     sx={{
                         display: 'grid',
                         gridTemplateColumns: { xs: '1fr', lg: '1fr 1fr' },
-                        gap: { xs: 2, sm: 6, lg: 8 },
+                        gap: { xs: 4, sm: 6, lg: 8 },
                         alignItems: 'center',
                     }}
                 >
@@ -154,19 +155,22 @@ export default function Hero() {
                         initial={{ opacity: 0, x: -50 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ duration: 0.8 }}
-                        // sx={{
-                        //     order: { xs: 2, lg: 1 },
-                        // }}
+                        sx={{
+                            textAlign: { xs: 'center', sm: 'center', lg: 'left' },
+                            display: 'flex',
+                            flexDirection: 'column',
+                            alignItems: { xs: 'center', lg: 'flex-start' },
+                        }}
                     >
                         <StatusBadge status="available" />
 
                         <Typography
                             variant="h2"
                             sx={{
-                                mt: 2,
+                                mt: { xs: 2.5, sm: 2 },
                                 fontWeight: 800,
-                                fontSize: { xs: '1.5rem', sm: '2.25rem', md: '3rem', lg: '4rem' },
-                                lineHeight: { xs: 1.2, sm: 1.3 },
+                                fontSize: { xs: '2rem', sm: '2.5rem', md: '3rem', lg: '4rem' },
+                                lineHeight: { xs: 1.15, sm: 1.2, md: 1.3 },
                                 background: theme.custom.gradients.text,
                                 WebkitBackgroundClip: 'text',
                                 WebkitTextFillColor: 'transparent',
@@ -177,11 +181,19 @@ export default function Hero() {
                         </Typography>
 
                         {/* Typing line */}
-                        <Box sx={{ mt: 2, display: 'flex', alignItems: 'center', gap: { xs: 0.5, sm: 1 } }}>
+                        <Box
+                            sx={{
+                                mt: { xs: 1.5, sm: 2 },
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: { xs: 'center', lg: 'flex-start' },
+                                gap: { xs: 0.5, sm: 1 },
+                            }}
+                        >
                             <Typography
                                 sx={{
                                     fontFamily: 'monospace',
-                                    fontSize: { xs: '1rem', sm: '1.25rem', md: '1.5rem' },
+                                    fontSize: { xs: '0.9rem', sm: '1.25rem', md: '1.5rem' },
                                     color: theme.palette.secondary.main,
                                     whiteSpace: 'nowrap',
                                     overflow: 'hidden',
@@ -196,8 +208,9 @@ export default function Hero() {
                                 transition={{ duration: 0.6, repeat: Infinity }}
                                 sx={{
                                     width: 2,
-                                    height: { xs: 20, sm: 28 },
+                                    height: { xs: 18, sm: 28 },
                                     backgroundColor: theme.palette.primary.main,
+                                    flexShrink: 0,
                                 }}
                             />
                         </Box>
@@ -205,10 +218,10 @@ export default function Hero() {
                         {/* Paragraph */}
                         <Typography
                             sx={{
-                                mt: 2,
-                                maxWidth: { xs: '100%', sm: 500, md: 520 },
-                                lineHeight: 1.6,
-                                fontSize: { xs: 12, sm: 14, md: 16 },
+                                mt: { xs: 2, sm: 2 },
+                                maxWidth: { xs: 380, sm: 500, md: 520 },
+                                lineHeight: 1.7,
+                                fontSize: { xs: 13, sm: 14, md: 16 },
                                 color: theme.palette.text.secondary,
                             }}
                         >
@@ -220,23 +233,30 @@ export default function Hero() {
                         <Box
                             sx={{
                                 display: 'flex',
-                                flexDirection: { xs: 'column', sm: 'row' },
+                                flexDirection: { xs: 'row', sm: 'row' },
                                 gap: { xs: 1.5, sm: 2 },
                                 mt: { xs: 3, sm: 4 },
+                                width: { xs: '100%', sm: 'auto' },
+                                justifyContent: { xs: 'center', lg: 'flex-start' },
                             }}
                         >
-                            <MotionBox whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.98 }} sx={{ width: { xs: '100%', sm: 'auto' } }}>
+                            <MotionBox whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.98 }} sx={{ flex: { xs: 1, sm: 'none' } }}>
                                 <Button
                                     variant="contained"
                                     endIcon={<ArrowRightAltIcon />}
                                     fullWidth
+                                    onClick={() => {
+                                        const el = document.getElementById('projects');
+                                        if (el) el.scrollIntoView({ behavior: 'smooth' });
+                                    }}
                                     sx={{
-                                        px: { xs: 2.5, sm: 4 },
-                                        py: { xs: 1.25, sm: 1.5 },
+                                        px: { xs: 2, sm: 4 },
+                                        py: { xs: 1.5, sm: 1.5 },
                                         borderRadius: 2,
                                         backgroundColor: theme.palette.primary.main,
                                         color: theme.palette.background.default,
                                         fontSize: { xs: 13, sm: 14 },
+                                        fontWeight: 600,
                                         '&:hover': { backgroundColor: theme.palette.primary.dark },
                                     }}
                                 >
@@ -244,18 +264,19 @@ export default function Hero() {
                                 </Button>
                             </MotionBox>
 
-                            <MotionBox whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.98 }} sx={{ width: { xs: '100%', sm: 'auto' } }}>
+                            <MotionBox whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.98 }} sx={{ flex: { xs: 1, sm: 'none' } }}>
                                 <Button
                                     variant="outlined"
                                     startIcon={<DownloadIcon />}
                                     fullWidth
                                     sx={{
-                                        px: { xs: 2.5, sm: 4 },
-                                        py: { xs: 1.25, sm: 1.5 },
+                                        px: { xs: 2, sm: 4 },
+                                        py: { xs: 1.5, sm: 1.5 },
                                         borderRadius: 2,
                                         borderColor: theme.palette.secondary.main,
                                         color: theme.palette.secondary.main,
                                         fontSize: { xs: 13, sm: 14 },
+                                        fontWeight: 600,
                                         '&:hover': { backgroundColor: theme.palette.action.hover },
                                     }}
                                 >
@@ -265,7 +286,15 @@ export default function Hero() {
                         </Box>
 
                         {/* ---------------- Social Links ---------------- */}
-                        <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: { xs: 0.75, sm: 1.5 }, mt: { xs: 2, sm: 4 } }}>
+                        <Box
+                            sx={{
+                                display: 'flex',
+                                flexWrap: 'wrap',
+                                gap: { xs: 1, sm: 1.5 },
+                                mt: { xs: 3, sm: 4 },
+                                justifyContent: { xs: 'center', lg: 'flex-start' },
+                            }}
+                        >
                             {socialLinks.map((link: SocialLink) => (
                                 <motion.a
                                     key={link.label}
@@ -277,16 +306,16 @@ export default function Hero() {
                                     style={{
                                         display: 'flex',
                                         alignItems: 'center',
-                                        gap: 4,
-                                        padding: '6px 10px',
-                                        borderRadius: 8,
+                                        gap: 6,
+                                        padding: '8px 14px',
+                                        borderRadius: 10,
                                         border: `1px solid ${theme.palette.divider}`,
                                         backgroundColor: theme.palette.background.paper,
                                         textDecoration: 'none',
                                     }}
                                 >
-                                    <link.icon style={{ fontSize: 16, color: theme.palette.primary.main }} />
-                                    <Typography sx={{ fontSize: { xs: 9, sm: 13 } }}>{link.label}</Typography>
+                                    <link.icon style={{ fontSize: 18, color: theme.palette.primary.main }} />
+                                    <Typography sx={{ fontSize: { xs: 12, sm: 13 }, color: theme.palette.text.primary }}>{link.label}</Typography>
                                 </motion.a>
                             ))}
                         </Box>
@@ -298,10 +327,8 @@ export default function Hero() {
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ duration: 0.8, delay: 0.2 }}
                         sx={{
-                            // order: { xs: 1, lg: 2 },
                             maxWidth: { xs: '100%', lg: '100%' },
                             overflowX: 'hidden',
-                            display: { xs: 'none', sm: 'block' },
                         }}
                     >
                         <Terminal lines={terminalLines} />

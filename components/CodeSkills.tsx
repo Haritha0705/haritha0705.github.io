@@ -54,7 +54,7 @@ export default function CodeSkills() {
                     <Typography
                         align="center"
                         fontFamily="monospace"
-                        color={theme.custom.gradients.text}
+                        color="text.secondary"
                         mb={4}
                     >
                         {'// My developer toolbox'}
@@ -99,8 +99,8 @@ export default function CodeSkills() {
                         </Stack>
 
                         <Stack direction="row" spacing={1} alignItems="center">
-                            <LayersIcon fontSize="small" sx={{ color: theme.custom.gradients.text }} />
-                            <Typography fontSize={12} fontFamily="monospace" sx={{ color: theme.custom.gradients.text }}>
+                            <LayersIcon fontSize="small" sx={{ color: theme.palette.text.secondary }} />
+                            <Typography fontSize={12} fontFamily="monospace" sx={{ color: theme.palette.text.secondary }}>
                                 skills.{activeTab}
                             </Typography>
                         </Stack>
@@ -134,7 +134,7 @@ export default function CodeSkills() {
                                     whiteSpace: 'nowrap',
                                     color:
                                         activeTab === tab.id
-                                            ? theme.custom.gradients.text
+                                            ? theme.palette.primary.main
                                             : theme.palette.text.primary,
                                     backgroundColor:
                                         activeTab === tab.id
@@ -168,7 +168,7 @@ export default function CodeSkills() {
                                 textAlign: 'right',
                                 fontFamily: 'monospace',
                                 fontSize: { xs: 9, sm: 11, md: 12 },
-                                color: theme.custom.gradients.text,
+                                color: theme.palette.text.secondary,
                                 backgroundColor: theme.palette.background.paper,
                                 borderRight: `1px solid ${theme.palette.divider}`,
                             }}

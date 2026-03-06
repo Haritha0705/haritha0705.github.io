@@ -29,8 +29,9 @@ export default function GitHubActivity() {
     useEffect(() => {
         async function fetchData() {
             try {
+                const currentYear = new Date().getFullYear();
                 const resp = await fetch(
-                    "https://github-contributions-api.jogruber.de/v4/Haritha0705?y=last"
+                    `https://github-contributions-api.jogruber.de/v4/Haritha0705?y=${currentYear}`
                 );
                 const json = await resp.json();
                 if (!json?.contributions) return;
@@ -132,11 +133,11 @@ export default function GitHubActivity() {
     return (
         <Box
             component="section"
-            px={{ xs: 2, md: 32 }}
+            px={{ xs: 2, md: 4 }}
             py={{ xs: 6, md: 8 }}
             bgcolor={theme.palette.background.default}
         >
-            <Container maxWidth="xl">
+            <Container maxWidth="lg">
                 {/* Title */}
                 <MotionBox
                     initial={{ opacity: 0, y: 15 }}
@@ -215,61 +216,77 @@ export default function GitHubActivity() {
                 </Grid>
 
                 {/* Heatmap */}
-                <Box overflow="auto">
-                    <Box display="flex" pl={7}>
-                        <Stack spacing={0.5} mr={1} fontSize={10} color="text.secondary">
-                            <span>Mon</span>
-                            <span>Wed</span>
-                            <span>Fri</span>
-                        </Stack>
+                <Box
+                    sx={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                    }}
+                >
+                    <Box overflow="auto" sx={{ maxWidth: '100%' }}>
+                        <Box display="flex">
+                            <Stack spacing="3px" mr={1} sx={{ fontSize: 10, color: 'text.secondary' }}>
+                                {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map((day, i) => (
+                                    <Box key={day} sx={{ height: 11, display: 'flex', alignItems: 'center' }}>
+                                        <span style={{ visibility: i % 2 === 1 ? 'visible' : 'hidden' }}>{day}</span>
+                                    </Box>
+                                ))}
+                            </Stack>
 
-                        <Box display="flex" gap="3px">
-                            {weeks.map((week, wi) => (
-                                <Stack key={wi} spacing="3px">
-                                    {week.map((day, di) => (
-                                        <MotionBox
-                                            key={di}
-                                            initial={{ opacity: 0, scale: 0 }}
-                                            whileInView={{ opacity: 1, scale: 1 }}
-                                            viewport={{ once: true }}
-                                            transition={{
-                                                duration: 0.25,
-                                                delay: wi * 0.004 + di * 0.002,
-                                            }}
-                                            style={{
-                                                width: 11,
-                                                height: 11,
-                                                borderRadius: 3,
-                                                backgroundColor: getColor(day.count),
-                                            }}
-                                            title={`${day.count} contributions • ${day.date}`}
-                                        />
-                                    ))}
-                                </Stack>
-                            ))}
+                            <Box display="flex" gap="3px">
+                                {weeks.map((week, wi) => (
+                                    <Stack key={wi} spacing="3px">
+                                        {week.map((day, di) => (
+                                            <MotionBox
+                                                key={di}
+                                                initial={{ opacity: 0, scale: 0 }}
+                                                whileInView={{ opacity: 1, scale: 1 }}
+                                                viewport={{ once: true }}
+                                                transition={{
+                                                    duration: 0.25,
+                                                    delay: wi * 0.004 + di * 0.002,
+                                                }}
+                                                style={{
+                                                    width: 11,
+                                                    height: 11,
+                                                    borderRadius: 3,
+                                                    backgroundColor: getColor(day.count),
+                                                }}
+                                                title={`${day.count} contributions • ${day.date}`}
+                                            />
+                                        ))}
+                                    </Stack>
+                                ))}
+                            </Box>
                         </Box>
-                    </Box>
 
-                    {/* Legend */}
-                    <Stack direction="row" spacing={{ xs: 0.5, sm: 1 }} mt={{ xs: 2, sm: 3 }} fontSize={{ xs: 8, sm: 10 }}>
-                        <Typography component="span" sx={{ fontSize: { xs: 8, sm: 10 } }}>
-                            Less
-                        </Typography>
-                        {[0, 2, 4, 8, 12].map((v, i) => (
-                            <Box
-                                key={i}
-                                sx={{
-                                    width: { xs: 8, sm: 11 },
-                                    height: { xs: 8, sm: 11 },
-                                    borderRadius: 1,
-                                    bgcolor: getColor(v),
-                                }}
-                            />
-                        ))}
-                        <Typography component="span" sx={{ fontSize: { xs: 8, sm: 10 } }}>
-                            More
-                        </Typography>
-                    </Stack>
+                        {/* Legend */}
+                        <Stack
+                            direction="row"
+                            spacing={{ xs: 0.5, sm: 1 }}
+                            mt={{ xs: 2, sm: 3 }}
+                            justifyContent="center"
+                            alignItems="center"
+                        >
+                            <Typography component="span" sx={{ fontSize: { xs: 8, sm: 10 } }}>
+                                Less
+                            </Typography>
+                            {[0, 2, 4, 8, 12].map((v, i) => (
+                                <Box
+                                    key={i}
+                                    sx={{
+                                        width: { xs: 8, sm: 11 },
+                                        height: { xs: 8, sm: 11 },
+                                        borderRadius: 1,
+                                        bgcolor: getColor(v),
+                                    }}
+                                />
+                            ))}
+                            <Typography component="span" sx={{ fontSize: { xs: 8, sm: 10 } }}>
+                                More
+                            </Typography>
+                        </Stack>
+                    </Box>
                 </Box>
             </Container>
         </Box>

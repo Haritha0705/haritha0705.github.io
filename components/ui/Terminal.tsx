@@ -106,7 +106,7 @@ export function Terminal({
                     sx={{
                         fontFamily: 'Monospace',
                         fontSize: { xs: 10, sm: 12 },
-                        color: theme.custom.gradients.text,
+                        color: theme.palette.text.secondary,
                     }}
                 >
                     haritha@dev:~
@@ -138,12 +138,12 @@ export function Terminal({
                             {line.type === 'command' ? (
                                 <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.75 }}>
                                     <Typography sx={{ color: theme.palette.primary.main, fontSize: { xs: 11, sm: 13 } }}>❯</Typography>
-                                    <Typography sx={{ color: theme.custom.gradients.text, fontSize: { xs: 11, sm: 13 } }}>
+                                    <Typography sx={{ color: theme.palette.text.primary, fontSize: { xs: 11, sm: 13 } }}>
                                         {line.text}
                                     </Typography>
                                 </Box>
                             ) : (
-                                <Typography sx={{ pl: { xs: 2, sm: 3 }, color: theme.custom.gradients.text, fontSize: { xs: 11, sm: 13 } }}>
+                                <Typography sx={{ pl: { xs: 2, sm: 3 }, color: theme.palette.text.secondary, fontSize: { xs: 11, sm: 13 } }}>
                                     {line.text}
                                 </Typography>
                             )}

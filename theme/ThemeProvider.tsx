@@ -23,13 +23,14 @@ export function useThemeContext() {
 
 export default function AppThemeProvider({children,}: { children: React.ReactNode; }) {
     const [mode, setMode] = useState<ThemeMode>(() => {
+        if (typeof window === 'undefined') return 'dark';
         try {
-            if (typeof window === 'undefined') return 'dark';
-            const saved = localStorage.getItem('theme') as ThemeMode | null;
-            return (saved as ThemeMode) || 'dark';
+            const saved = localStorage.getItem('theme');
+            if (saved === 'light' || saved === 'dark') return saved;
         } catch {
-            return 'dark';
+            // ignore localStorage errors
         }
+        return 'dark';
     });
 
     // Sync html class for Tailwind

@@ -9,7 +9,7 @@ import {
     Typography,
     ButtonBase,
     IconButton,
-    useTheme, Icon,
+    useTheme,
 } from '@mui/material';
 import { Search, Terminal, Close } from '@mui/icons-material';
 import { commands } from '@/data/content';
@@ -59,7 +59,9 @@ export default function CommandPalette() {
 
             if (e.key === 'Enter') {
                 e.preventDefault();
-                filtered[selected] && scrollTo(filtered[selected].action);
+                if (filtered[selected]) {
+                    scrollTo(filtered[selected].action);
+                }
             }
         };
 
@@ -194,7 +196,7 @@ export default function CommandPalette() {
                                                     },
                                                 }}
                                             >
-                                                <Icon sx={{ fontSize: { xs: 18, sm: 20 } }} />
+                                                <Box sx={{ fontSize: { xs: 18, sm: 20 }, display: 'flex', alignItems: 'center' }}>{cmd.icon}</Box>
                                                 <Typography fontSize={{ xs: 12, sm: 14 }}>{cmd.label}</Typography>
                                             </ButtonBase>
                                         ))
