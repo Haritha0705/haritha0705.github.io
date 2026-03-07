@@ -492,6 +492,7 @@ export default function ProjectDetailPage() {
                                                 component="img"
                                                 src={img}
                                                 alt={`${project.title} screenshot ${i + 1}`}
+                                                loading="lazy"
                                                 sx={{
                                                     width: '100%',
                                                     borderRadius: 2,

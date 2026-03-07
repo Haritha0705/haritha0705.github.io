@@ -10,6 +10,14 @@ body {
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* Skip rendering off-screen sections until they scroll into view.
+   Single biggest paint-performance win for long single-page sites. */
+section {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 600px;
 }
 
 /* Hide scrollbar but allow scrolling */
@@ -36,4 +44,19 @@ body {
     min-height: 44px;
     min-width: 44px;
   }
+}
+
+/* Accessibility + performance: disable animations for users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Smooth image rendering */
+img {
+  content-visibility: auto;
 }

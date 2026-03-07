@@ -22,22 +22,28 @@ export function useThemeContext() {
 }
 
 export default function AppThemeProvider({children,}: { children: React.ReactNode; }) {
-    const [mode, setMode] = useState<ThemeMode>(() => {
-        if (typeof window === 'undefined') return 'dark';
+    const [mode, setMode] = useState<ThemeMode>('dark');
+    const [mounted, setMounted] = useState(false);
+
+    // Read saved theme from localStorage after mount (avoid hydration mismatch)
+    useEffect(() => {
         try {
             const saved = localStorage.getItem('theme');
-            if (saved === 'light' || saved === 'dark') return saved;
+            if (saved === 'light' || saved === 'dark') {
+                setMode(saved);
+            }
         } catch {
             // ignore localStorage errors
         }
-        return 'dark';
-    });
+        setMounted(true);
+    }, []);
 
     // Sync html class for Tailwind
     useEffect(() => {
+        if (!mounted) return;
         document.documentElement.classList.toggle('dark', mode === 'dark');
         localStorage.setItem('theme', mode);
-    }, [mode]);
+    }, [mode, mounted]);
 
     const toggleTheme = () => {
         setMode((prev) => (prev === 'dark' ? 'light' : 'dark'));

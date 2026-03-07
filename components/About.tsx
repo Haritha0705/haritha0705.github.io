@@ -84,15 +84,15 @@ export default function About() {
                             >
                                 <Image
                                     src="/about_Img.png"
-                                    alt="Profile"
+                                    alt="Haritha Wickremesinghe — Full Stack Developer"
                                     width={400}
                                     height={400}
+                                    loading="lazy"
                                     style={{
                                         width: '100%',
                                         height: 'auto',
                                         borderRadius: 16,
                                     }}
-                                    priority
                                 />
                             </Paper>
 

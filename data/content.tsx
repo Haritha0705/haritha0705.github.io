@@ -1,8 +1,6 @@
 import {ElementType, ReactNode} from "react";
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import DownloadIcon from '@mui/icons-material/Download';
-import CodeIcon from '@mui/icons-material/Code';
-import TerminalIcon from '@mui/icons-material/Terminal';
 import StorageIcon from '@mui/icons-material/Storage';
 import CloudQueueIcon from '@mui/icons-material/CloudQueue';
 import BuildIcon from '@mui/icons-material/Build';
@@ -12,10 +10,15 @@ import TwitterIcon from "@mui/icons-material/Twitter";
 import EmailIcon from "@mui/icons-material/Email";
 import PhoneIcon from "@mui/icons-material/Phone";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
-import { Code, Mail, Person, Terminal, Work } from "@mui/icons-material";
+import CodeIcon from "@mui/icons-material/Code";
+import TerminalIcon from "@mui/icons-material/Terminal";
 import WorkIcon from '@mui/icons-material/Work';
+import MailIcon from "@mui/icons-material/Mail";
+import PersonIcon from "@mui/icons-material/Person";
+import ArticleIcon from "@mui/icons-material/Article";
 import SchoolIcon from '@mui/icons-material/School';
 import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
+import MediumIcon from '@/components/ui/MediumIcon';
 
 // Hero Page Data and interfaces
 
@@ -25,7 +28,7 @@ export interface TerminalLine {
 }
 
 export interface SocialLink {
-    icon: React.ElementType;
+    icon: ElementType;
     label: string;
     href: string;
 }
@@ -43,6 +46,7 @@ export const terminalLines: TerminalLine[] = [
 export const socialLinks: SocialLink[] = [
     { icon: GitHubIcon, label: 'GitHub', href: 'https://github.com/Haritha0705' },
     { icon: LinkedInIcon, label: 'LinkedIn', href: 'https://linkedin.com/in/haritha-wickremesinghe' },
+    { icon: MediumIcon, label: 'Medium', href: 'https://medium.com/@harithawikramasinha2003' },
     { icon: MailOutlineIcon, label: 'Email', href: 'mailto:harithawikramasinha2003@gmail.com' },
     { icon: DownloadIcon, label: 'Resume', href: '/Haritha _Wickremesinghe.pdf' },
 ];
@@ -177,11 +181,12 @@ export interface Command {
 }
 
 export const commands: Command[] = [
-    { icon: <Person />, label: 'Go to About', action: 'about', keywords: 'about me profile' },
-    { icon: <Terminal />, label: 'View Skills', action: 'skills', keywords: 'skills tech stack' },
-    { icon: <Code />, label: 'Browse Projects', action: 'projects', keywords: 'projects portfolio' },
-    { icon: <Work />, label: 'View Experience', action: 'experience', keywords: 'experience timeline' },
-    { icon: <Mail />, label: 'Contact Me', action: 'contact', keywords: 'contact email message' },
+    { icon: <PersonIcon />, label: 'Go to About', action: 'about', keywords: 'about me profile' },
+    { icon: <TerminalIcon />, label: 'View Skills', action: 'skills', keywords: 'skills tech stack' },
+    { icon: <CodeIcon />, label: 'Browse Projects', action: 'projects', keywords: 'projects portfolio' },
+    { icon: <ArticleIcon />, label: 'Read Blog', action: 'blog', keywords: 'blog articles medium posts' },
+    { icon: <WorkIcon />, label: 'View Experience', action: 'experience', keywords: 'experience timeline' },
+    { icon: <MailIcon />, label: 'Contact Me', action: 'contact', keywords: 'contact email message' },
 ];
 
 // Contact Page Data and interfaces
@@ -228,6 +233,7 @@ export const contactInfo: ContactItem[] = [
 export const socialLinksContact: SocialLinkContact[] = [
     { icon: GitHubIcon, label: "GitHub", href: "https://github.com/Haritha0705" },
     { icon: LinkedInIcon, label: "LinkedIn", href: "https://linkedin.com/in/haritha-wickremesinghe" },
+    { icon: MediumIcon, label: "Medium", href: "https://medium.com/@harithawikramasinha2003" },
     { icon: TwitterIcon, label: "Twitter", href: "https://twitter.com" },
 ];
 
@@ -500,7 +506,7 @@ A modern, responsive single-page application showcasing projects, skills, and ex
 
 // Experience Page Data and interface
 
-interface TimelineItem {
+export interface TimelineItem {
     type: 'experience' | 'education' | 'achievement';
     icon: ElementType;
     title: string;
@@ -529,7 +535,7 @@ export const timeline: TimelineItem[] = [
         title: 'React Developer Intern',
         company: 'Ceylon Edge',
         period: 'Jul 2025 - Present',
-        current: false,
+        current: true,
         description:
             'Contributing to dynamic web applications using React.js, enhancing UI/UX, and collaborating\n' +
             'with the team on real-world projects to build scalable frontend solutions.',
@@ -565,7 +571,7 @@ export interface FooterLink {
 }
 
 export interface SocialLinkFooter {
-    icon: React.ElementType;
+    icon: ElementType;
     href: string;
     label: string;
 }
@@ -575,6 +581,7 @@ export const footerLinks: FooterLink[] = [
     { label: 'About', href: '#about' },
     { label: 'Skills', href: '#skills' },
     { label: 'Projects', href: '#projects' },
+    { label: 'Blog', href: '#blog' },
     { label: 'Experience', href: '#experience' },
     { label: 'Contact', href: '#contact' },
 ];
@@ -582,6 +589,7 @@ export const footerLinks: FooterLink[] = [
 export const socialLinksFooter: SocialLinkFooter[] = [
     { icon: GitHubIcon, href: 'https://github.com/Haritha0705', label: 'GitHub' },
     { icon: LinkedInIcon, href: 'https://linkedin.com/in/haritha-wickremesinghe', label: 'LinkedIn' },
+    { icon: MediumIcon, href: 'https://medium.com/@harithawikramasinha2003', label: 'Medium' },
     { icon: TwitterIcon, href: 'https://twitter.com', label: 'Twitter' },
     { icon: EmailIcon, href: 'mailto:harithawikramasinha2003@gmail.com', label: 'Email' },
 ];
@@ -605,6 +613,7 @@ export const navItems: NavItem[] = [
     { id: 'about', label: 'About' },
     { id: 'skills', label: 'Skills' },
     { id: 'projects', label: 'Projects' },
+    { id: 'blog', label: 'Blog' },
     { id: 'experience', label: 'Experience' },
     { id: 'contact', label: 'Contact' },
 ];

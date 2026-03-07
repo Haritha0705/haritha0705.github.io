@@ -15,16 +15,16 @@ const MotionBox = motion(Box);
 
 /* ---------------- Matrix data ---------------- */
 const generateBinaryStrings = () =>
-    Array.from({ length: 15 }, (_, i) => {
+    Array.from({ length: 8 }, (_, i) => {
         let seed = i * 12345;
-        return Array.from({ length: 20 }, () => {
+        return Array.from({ length: 12 }, () => {
             seed = (seed * 9301 + 49297) % 233280;
             return seed % 2 === 0 ? '1' : '0';
         }).join('');
     });
 const BINARY_STRINGS = generateBinaryStrings();
 
-const ANIMATION_CONFIG = Array.from({ length: 15 }, (_, i) => ({
+const ANIMATION_CONFIG = Array.from({ length: 8 }, (_, i) => ({
     duration: 5 + (i % 5),
     delay: (i * 0.5) % 5,
 }));
@@ -35,6 +35,7 @@ export default function Hero() {
     const [displayedText, setDisplayedText] = useState('');
     const [titleIndex, setTitleIndex] = useState(0);
     const [isDeleting, setIsDeleting] = useState(false);
+    const [isPaused, setIsPaused] = useState(false);
     const [mounted, setMounted] = useState(false);
 
     useEffect(() => {
@@ -43,16 +44,23 @@ export default function Hero() {
     }, []);
 
     useEffect(() => {
+        if (isPaused) {
+            const pauseTimer = setTimeout(() => {
+                setIsPaused(false);
+                setIsDeleting(true);
+            }, 2000);
+            return () => clearTimeout(pauseTimer);
+        }
+
         const currentTitle = TITLES[titleIndex];
         const typingSpeed = isDeleting ? 50 : 100;
-        const pauseTime = isDeleting ? 500 : 2000;
 
         const timeout = setTimeout(() => {
             if (!isDeleting) {
                 if (displayedText.length < currentTitle.length) {
                     setDisplayedText(currentTitle.slice(0, displayedText.length + 1));
                 } else {
-                    setTimeout(() => setIsDeleting(true), pauseTime);
+                    setIsPaused(true);
                 }
             } else {
                 if (displayedText.length > 0) {
@@ -65,7 +73,7 @@ export default function Hero() {
         }, typingSpeed);
 
         return () => clearTimeout(timeout);
-    }, [displayedText, isDeleting, titleIndex]);
+    }, [displayedText, isDeleting, titleIndex, isPaused]);
 
     return (
         <Box
@@ -101,8 +109,9 @@ export default function Hero() {
                             key={i}
                             sx={{
                                 position: 'absolute',
-                                left: { xs: `${(i / BINARY_STRINGS.length) * 100}%`, sm: i * 80 },
+                                left: { xs: `${(i / BINARY_STRINGS.length) * 100}%`, sm: i * 150 },
                                 color: theme.palette.primary.main,
+                                willChange: 'transform',
                             }}
                             initial={{ y: -100 }}
                             animate={{ y: '100vh' }}
@@ -269,6 +278,9 @@ export default function Hero() {
                                     variant="outlined"
                                     startIcon={<DownloadIcon />}
                                     fullWidth
+                                    component="a"
+                                    href="/Haritha _Wickremesinghe.pdf"
+                                    download
                                     sx={{
                                         px: { xs: 2, sm: 4 },
                                         py: { xs: 1.5, sm: 1.5 },

@@ -29,8 +29,7 @@ export default function GitHubActivity() {
     useEffect(() => {
         async function fetchData() {
             try {
-                const currentYear = new Date().getFullYear();
-                const resp = await fetch(`https://github-contributions-api.jogruber.de/v4/Haritha0705?y=${currentYear}`);
+                const resp = await fetch('/api/github');
                 const json = await resp.json();
                 if (!json?.contributions) return;
                 setContributions(json.contributions);
@@ -235,20 +234,19 @@ export default function GitHubActivity() {
                                 {weeks.map((week, wi) => (
                                     <Stack key={wi} spacing="3px">
                                         {week.map((day, di) => (
-                                            <MotionBox
+                                            <Box
                                                 key={di}
-                                                initial={{ opacity: 0, scale: 0 }}
-                                                whileInView={{ opacity: 1, scale: 1 }}
-                                                viewport={{ once: true }}
-                                                transition={{
-                                                    duration: 0.25,
-                                                    delay: wi * 0.004 + di * 0.002,
-                                                }}
-                                                style={{
+                                                sx={{
                                                     width: 11,
                                                     height: 11,
-                                                    borderRadius: 3,
+                                                    borderRadius: '3px',
                                                     backgroundColor: getColor(day.count),
+                                                    transition: 'transform 0.15s, box-shadow 0.15s',
+                                                    '&:hover': {
+                                                        transform: 'scale(1.8)',
+                                                        boxShadow: `0 0 6px ${getColor(day.count)}`,
+                                                        zIndex: 1,
+                                                    },
                                                 }}
                                                 title={`${day.count} contributions • ${day.date}`}
                                             />

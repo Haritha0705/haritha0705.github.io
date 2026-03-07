@@ -28,25 +28,34 @@ export default function Navigation({ toggleTheme }: { toggleTheme: () => void })
     const [mobileOpen, setMobileOpen] = useState(false);
     const [active, setActive] = useState('home');
 
-    /* Scroll detection */
+    /* Scroll detection — throttled with rAF to avoid jank */
     useEffect(() => {
+        let ticking = false;
+
         const onScroll = () => {
-            setScrolled(window.scrollY > 50);
+            if (ticking) return;
+            ticking = true;
 
-            navItems.forEach((item) => {
-                const el = document.getElementById(item.id);
-                if (!el) return;
+            requestAnimationFrame(() => {
+                setScrolled(window.scrollY > 50);
 
-                const top = el.offsetTop - 100;
-                const bottom = top + el.offsetHeight;
-
-                if (window.scrollY >= top && window.scrollY < bottom) {
-                    setActive(item.id);
+                const scrollY = window.scrollY;
+                for (const item of navItems) {
+                    const el = document.getElementById(item.id);
+                    if (!el) continue;
+                    const top = el.offsetTop - 100;
+                    const bottom = top + el.offsetHeight;
+                    if (scrollY >= top && scrollY < bottom) {
+                        setActive(item.id);
+                        break;
+                    }
                 }
+
+                ticking = false;
             });
         };
 
-        window.addEventListener('scroll', onScroll);
+        window.addEventListener('scroll', onScroll, { passive: true });
         return () => window.removeEventListener('scroll', onScroll);
     }, []);
 

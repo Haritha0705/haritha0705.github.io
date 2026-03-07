@@ -1,6 +1,7 @@
 "use client";
 
-import { motion } from 'framer-motion';
+import { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import {
     Box,
     Container,
@@ -20,6 +21,15 @@ const MotionBox = motion.create(Box);
 export default function Footer() {
     const theme = useTheme();
     const currentYear = new Date().getFullYear();
+    const [showScrollTop, setShowScrollTop] = useState(false);
+
+    useEffect(() => {
+        const handleScroll = () => {
+            setShowScrollTop(window.scrollY > 300);
+        };
+        window.addEventListener('scroll', handleScroll, { passive: true });
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
 
     const scrollToTop = () => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -166,18 +176,18 @@ export default function Footer() {
                         >
                             <Button
                                 component="a"
-                                href="mailto:haritha@example.com"
+                                href="mailto:harithawikramasinha2003@gmail.com"
                                 sx={{ textTransform: 'none', p: 0, minWidth: 0, color: 'inherit', justifyContent: 'flex-start', fontSize: { xs: 12, sm: 14 } }}
                             >
-                                haritha@example.com
+                                harithawikramasinha2003@gmail.com
                             </Button>
 
                             <Button
                                 component="a"
-                                href="tel:+94771234567"
+                                href="tel:+94785156282"
                                 sx={{ textTransform: 'none', p: 0, minWidth: 0, color: 'inherit', justifyContent: 'flex-start', fontSize: { xs: 12, sm: 14 } }}
                             >
-                                +94 77 123 4567
+                                +94 785 156 282
                             </Button>
 
                             <Typography fontSize={{ xs: 12, sm: 14 }}>
@@ -221,29 +231,36 @@ export default function Footer() {
             </Container>
 
             {/* Back to Top */}
-            <MotionBox
-                initial={{ opacity: 0, scale: 0.8 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                whileHover={{ scale: 1.1, y: -2 }}
-                whileTap={{ scale: 0.9 }}
-            >
-                <IconButton
-                    onClick={scrollToTop}
-                    sx={{
-                        position: 'fixed',
-                        bottom: { xs: 12, sm: 16 },
-                        right: { xs: 12, sm: 16 },
-                        backgroundColor: theme.palette.primary.main,
-                        color: '#fff',
-                        width: { xs: 40, sm: 48 },
-                        height: { xs: 40, sm: 48 },
-                        '&:hover': { backgroundColor: theme.palette.primary.dark },
-                    }}
-                >
-                    <ArrowUpwardIcon sx={{ fontSize: { xs: 20, sm: 24 } }} />
-                </IconButton>
-            </MotionBox>
+            <AnimatePresence>
+                {showScrollTop && (
+                    <MotionBox
+                        initial={{ opacity: 0, scale: 0.8 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        exit={{ opacity: 0, scale: 0.8 }}
+                        whileHover={{ scale: 1.1, y: -2 }}
+                        whileTap={{ scale: 0.9 }}
+                        sx={{
+                            position: 'fixed',
+                            bottom: { xs: 12, sm: 16 },
+                            right: { xs: 12, sm: 16 },
+                            zIndex: 1100,
+                        }}
+                    >
+                        <IconButton
+                            onClick={scrollToTop}
+                            sx={{
+                                backgroundColor: theme.palette.primary.main,
+                                color: '#fff',
+                                width: { xs: 40, sm: 48 },
+                                height: { xs: 40, sm: 48 },
+                                '&:hover': { backgroundColor: theme.palette.primary.dark },
+                            }}
+                        >
+                            <ArrowUpwardIcon sx={{ fontSize: { xs: 20, sm: 24 } }} />
+                        </IconButton>
+                    </MotionBox>
+                )}
+            </AnimatePresence>
         </Box>
     );
 }
