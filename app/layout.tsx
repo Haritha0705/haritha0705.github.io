@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v15-appRouter';
 import AppThemeProvider from "@/theme/ThemeProvider";
+import { Analytics } from "@vercel/analytics/next"
 import "./globals.css";
 
 export const viewport: Viewport = {
@@ -47,6 +48,7 @@ export default function RootLayout({
       </head>
       <body>
         <AppRouterCacheProvider>
+            <Analytics/>
             <AppThemeProvider>
                 {children}
             </AppThemeProvider>
