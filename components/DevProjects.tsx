@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
     Box,
@@ -11,7 +12,6 @@ import {
     Button,
     Stack,
     Divider,
-    Modal,
     IconButton,
     useTheme,
 } from '@mui/material';
@@ -23,7 +23,6 @@ import CallSplitIcon from '@mui/icons-material/CallSplit';
 import TerminalIcon from '@mui/icons-material/Terminal';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
-import CloseIcon from '@mui/icons-material/Close';
 import { filters, projects } from '@/data/content';
 
 const MotionBox = motion.create(Box);
@@ -31,16 +30,13 @@ const MotionBox = motion.create(Box);
 export default function DevProjects() {
     const [activeFilter, setActiveFilter] = useState('all');
     const [hovered, setHovered] = useState<number | null>(null);
-    const [selected, setSelected] = useState<number | null>(null);
-
+    const router = useRouter();
     const theme = useTheme();
 
     const filtered =
         activeFilter === 'all'
             ? projects
             : projects.filter((p) => p.category.includes(activeFilter));
-
-    const project = projects.find((p) => p.id === selected);
 
     return (
         <Box
@@ -119,14 +115,14 @@ export default function DevProjects() {
                                         transition={{ delay: i * 0.08 }}
                                         onHoverStart={() => setHovered(p.id)}
                                         onHoverEnd={() => setHovered(null)}
-                                        onClick={() => setSelected(p.id)}
+                                        onClick={() => router.push(`/projects/${p.id}`)}
                                     >
                                         <Box
                                             borderRadius={2}
                                             border="2px solid"
                                             borderColor={hovered === p.id ? theme.palette.primary.main : theme.palette.divider}
                                             bgcolor={theme.palette.background.paper}
-                                            sx={{ cursor: 'pointer', overflow: 'hidden' }}
+                                            sx={{ cursor: 'pointer', overflow: 'hidden', transition: 'border-color 0.2s' }}
                                         >
                                             {/* Header */}
                                             <Stack direction="row" justifyContent="space-between" p={2} borderBottom="1px solid" borderColor={theme.palette.divider}>
@@ -137,11 +133,11 @@ export default function DevProjects() {
 
                                                 <Stack direction="row" spacing={1}>
                                                     {p.demo && (
-                                                        <IconButton size="small" href={p.demo} onClick={(e) => e.stopPropagation()}>
+                                                        <IconButton size="small" href={p.demo} target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()}>
                                                             <OpenInNewIcon fontSize="small" />
                                                         </IconButton>
                                                     )}
-                                                    <IconButton size="small" href={p.github} onClick={(e) => e.stopPropagation()}>
+                                                    <IconButton size="small" href={p.github} target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()}>
                                                         <GitHubIcon fontSize="small" />
                                                     </IconButton>
                                                 </Stack>
@@ -154,7 +150,7 @@ export default function DevProjects() {
                                                     <Typography fontWeight="600" noWrap>{p.title}</Typography>
                                                 </Stack>
 
-                                                <Typography fontSize={13} color="text.secondary" mb={2} noWrap>
+                                                <Typography fontSize={13} color="text.secondary" mb={2} sx={{ display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>
                                                     {p.description}
                                                 </Typography>
 
@@ -192,61 +188,6 @@ export default function DevProjects() {
                         </Grid>
                     </MotionBox>
                 </AnimatePresence>
-
-                {/* Modal */}
-                <Modal open={!!project} onClose={() => setSelected(null)}>
-                    <Box
-                        component={motion.div}
-                        initial={{ scale: 0.85 }}
-                        animate={{ scale: 1 }}
-                        sx={{
-                            width: { xs: '90%', sm: '80%', md: 520 },
-                            maxWidth: 520,
-                            maxHeight: '80vh',
-                            overflowY: 'auto',
-                            mx: 'auto',
-                            mt: { xs: '15%', sm: '10%' },
-                            p: { xs: 2.5, sm: 3, md: 4 },
-                            backgroundColor: theme.palette.background.paper,
-                            borderRadius: { xs: 2, sm: 3 },
-                            position: 'relative',
-                        }}
-                    >
-                        <IconButton onClick={() => setSelected(null)} sx={{ position: 'absolute', top: 8, right: 8 }}>
-                            <CloseIcon />
-                        </IconButton>
-
-                        <Typography variant="h6" mb={1} fontSize={{ xs: 16, sm: 18, md: 20 }}>{project?.title}</Typography>
-
-                        <Typography fontSize={{ xs: 12, sm: 14 }} mb={3}>{project?.description}</Typography>
-
-                        <Stack direction="row" flexWrap="wrap" gap={0.5} mb={3}>
-                            {project?.tech.map((t) => (
-                                <Chip key={t} label={t} size="small" sx={{ fontFamily: 'monospace', fontSize: { xs: 10, sm: 12 } }} />
-                            ))}
-                        </Stack>
-
-                        <Stack spacing={0.5}>
-                            <Typography component={"span"} fontSize={{ xs: 10, sm: 12 }}>Repo: {project?.githubRepo}</Typography>
-                            <Typography component={"span"} fontSize={{ xs: 10, sm: 12 }}>⭐ {project?.stars}</Typography>
-                            <Typography component={"span"} fontSize={{ xs: 10, sm: 12 }}>🍴 {project?.forks}</Typography>
-                            <Typography component={"span"} fontSize={{ xs: 10, sm: 12 }}>📦 Lines: {project?.lines}</Typography>
-                        </Stack>
-
-                        <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2} mt={3}>
-                            {project?.demo && (
-                                <Button variant="contained" href={project.demo} target="_blank" rel="noopener noreferrer" fullWidth sx={{ fontSize: { xs: 12, sm: 14 } }}>
-                                    Demo
-                                </Button>
-                            )}
-                            {project?.github && (
-                                <Button variant="outlined" href={project.github} target="_blank" rel="noopener noreferrer" fullWidth sx={{ fontSize: { xs: 12, sm: 14 } }}>
-                                    GitHub
-                                </Button>
-                            )}
-                        </Stack>
-                    </Box>
-                </Modal>
             </Container>
         </Box>
     );

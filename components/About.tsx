@@ -159,9 +159,9 @@ export default function About() {
 
                             <Stack spacing={{ xs: 1.5, sm: 2 }} mb={{ xs: 3, sm: 4 }}>
                                 {[
-                                    'I am a 2nd-year Software Engineering student passionate about building impactful digital experiences.',
-                                    'I specialize in full-stack development with React, Node.js, and TypeScript.',
-                                    'I believe in continuous learning and staying ahead of technology trends.',
+                                    'Software Engineering undergraduate at the Informatics Institute of Technology, affiliated with the University of Westminster, with hands-on experience in full-stack development.',
+                                    'Currently interning as a React Developer at Ceylon Edge, building scalable frontend solutions with React.js, Next.js, Node.js, NestJS, and TypeScript.',
+                                    'Proficient across the stack — from Flutter and React Native on mobile to PostgreSQL, MongoDB, and Redis on the backend — with a strong foundation in algorithms, data structures, and OOP.',
                                 ].map((text, i) => (
                                     <Typography key={i} sx={{ color: theme.palette.text.secondary, fontSize: { xs: 13, sm: 14, md: 16 } }}>
                                         {text}

@@ -32,19 +32,19 @@ export interface SocialLink {
 
 export const terminalLines: TerminalLine[] = [
     { type: 'command', text: '$ whoami' },
-    { type: 'output', text: 'Haritha Wickramasinga - Full Stack Developer' },
+    { type: 'output', text: 'Haritha Wickremesinghe — Full Stack Developer' },
     { type: 'command', text: '$ cat skills.txt' },
-    { type: 'output', text: 'React • Node.js • TypeScript • MongoDB • AWS' },
+    { type: 'output', text: 'React • Next.js • Node.js • NestJS • TypeScript • MongoDB • PostgreSQL' },
     { type: 'command', text: '$ echo $STATUS' },
     { type: 'output', text: '🟢 Available for opportunities' },
     { type: 'command', text: '$ ./start-project.sh' },
 ];
 
 export const socialLinks: SocialLink[] = [
-    { icon: GitHubIcon, label: 'GitHub', href: 'https://github.com' },
-    { icon: LinkedInIcon, label: 'LinkedIn', href: 'https://linkedin.com' },
-    { icon: MailOutlineIcon, label: 'Email', href: 'mailto:haritha@example.com' },
-    { icon: DownloadIcon, label: 'Resume', href: '#' },
+    { icon: GitHubIcon, label: 'GitHub', href: 'https://github.com/Haritha0705' },
+    { icon: LinkedInIcon, label: 'LinkedIn', href: 'https://linkedin.com/in/haritha-wickremesinghe' },
+    { icon: MailOutlineIcon, label: 'Email', href: 'mailto:harithawikramasinha2003@gmail.com' },
+    { icon: DownloadIcon, label: 'Resume', href: '/Haritha _Wickremesinghe.pdf' },
 ];
 
 // About Page Data and interface
@@ -55,20 +55,20 @@ export interface Stat {
 }
 
 export const stats: Stat[] = [
-    { label: 'Projects', value: '5+' },
-    { label: 'Technologies', value: '15+' },
-    { label: 'Experience', value: '3+ Yrs' },
+    { label: 'Projects', value: '6+' },
+    { label: 'Technologies', value: '20+' },
+    { label: 'Experience', value: '1+ Yr' },
 ];
 
 export const competencies: string[] = [
     'Full Stack Development',
     'React & Next.js',
-    'Node.js & Express',
+    'Node.js & NestJS',
+    'Flutter & React Native',
+    'REST API Design',
     'Database Design',
-    'API Development',
-    'Cloud Deployment',
-    'Agile Methodology',
-    'Problem Solving',
+    'Docker & Kubernetes',
+    'OOP & Data Structures',
 ];
 
 // Skills Page Data and interfaces
@@ -93,13 +93,14 @@ import React from 'react';
 import NextJS from 'next';
 import TypeScript from 'typescript';
 import TailwindCSS from 'tailwindcss';
-import Material UI from 'mui';
+import MaterialUI from '@mui/material';
 
 const skills = {
   frameworks: ['React', 'Next.js'],
-  languages: ['TypeScript', 'JavaScript', 'HTML', 'CSS'],
-  styling: ['Tailwind CSS' , 'MUI', 'Sass'],
-  tools: ['Vite', 'Webpack', 'Redux', 'React Query'],
+  languages: ['TypeScript', 'JavaScript', 'HTML5', 'CSS3'],
+  styling: ['Tailwind CSS', 'MUI', 'Sass'],
+  mobile: ['Flutter', 'React Native'],
+  tools: ['Vite', 'Redux', 'React Query'],
   proficiency: '90%'
 };
 
@@ -111,10 +112,11 @@ const mongoose = require('mongoose');
 
 class BackendDeveloper {
   constructor() {
-    this.languages = ['Node.js', 'Python', 'Java'];
-    this.frameworks = ['Express', 'FastAPI', 'Spring Boot', 'Flask', 'NestJS', 'Ballerina'];
+    this.languages = ['Node.js', 'Java', 'Python'];
+    this.frameworks = ['Express', 'NestJS', 'Spring Boot', 'Flask'];
     this.apis = ['REST', 'GraphQL', 'WebSocket'];
     this.auth = ['JWT', 'OAuth', 'Passport'];
+    this.orm = ['Prisma', 'Mongoose', 'TypeORM'];
   }
 
   buildAPI() {
@@ -129,7 +131,7 @@ SELECT * FROM skills
 WHERE category = 'Database'
 ORDER BY proficiency DESC;
 
-/* MongoDB, PostgreSQL, MySQL, Redis */
+/* MongoDB, PostgreSQL, MySQL, Redis, Firebase */
 
 CREATE TABLE expertise (
   id SERIAL PRIMARY KEY,
@@ -140,19 +142,20 @@ CREATE TABLE expertise (
     devops: `# DevOps & Cloud
 docker build -t app .
 docker-compose up -d
+kubectl apply -f deployment.yaml
 
-• AWS • Vercel 
-• Render • CI/CD 
-• GitHub Actions
+• AWS • Vercel • Render
+• Docker • Kubernetes
+• Git • GitHub Actions
 `,
 
     tools: `{
-  "editor": "VS Code",
-  "design": ["Figma", "Adobe XD"],
+  "editor": ["VS Code", "WebStorm", "IntelliJ", "PyCharm"],
+  "design": ["Figma"],
   "testing": ["Postman", "Jest", "JUnit"],
   "containerization": "Docker",
   "orchestration": "Kubernetes",
-  "versionControl": "Git & GitHub" , "Bitbucket",
+  "versionControl": ["Git & GitHub", "Bitbucket"]
 }`,
 };
 
@@ -205,14 +208,14 @@ export const contactInfo: ContactItem[] = [
     {
         icon: EmailIcon,
         label: "Email",
-        value: "haritha@example.com",
-        href: "mailto:haritha@example.com",
+        value: "harithawikramasinha2003@gmail.com",
+        href: "mailto:harithawikramasinha2003@gmail.com",
     },
     {
         icon: PhoneIcon,
         label: "Phone",
-        value: "+94 77 123 4567",
-        href: "tel:+94771234567",
+        value: "+94 785 156 282",
+        href: "tel:+94785156282",
     },
     {
         icon: LocationOnIcon,
@@ -223,8 +226,8 @@ export const contactInfo: ContactItem[] = [
 ];
 
 export const socialLinksContact: SocialLinkContact[] = [
-    { icon: GitHubIcon, label: "GitHub", href: "https://github.com" },
-    { icon: LinkedInIcon, label: "LinkedIn", href: "https://linkedin.com" },
+    { icon: GitHubIcon, label: "GitHub", href: "https://github.com/Haritha0705" },
+    { icon: LinkedInIcon, label: "LinkedIn", href: "https://linkedin.com/in/haritha-wickremesinghe" },
     { icon: TwitterIcon, label: "Twitter", href: "https://twitter.com" },
 ];
 
@@ -250,6 +253,8 @@ export interface Project {
     demo: string | null;
     lines: string;
     commits: string;
+    images: string[];
+    readme: string;
 }
 
 export const filters: Filter[] = [
@@ -257,104 +262,239 @@ export const filters: Filter[] = [
     { id: 'featured', label: '// Featured' },
     { id: 'web', label: '// Web Apps' },
     { id: 'api', label: '// APIs' },
+    { id: 'mobile', label: '// Mobile' },
 ];
 
 export const projects: Project[] = [
     {
         id: 1,
-        title: 'DevConnect Platform',
-        description: 'Real-time collaboration platform for developers with code sharing, video calls, and project management.',
+        title: 'E-Tutor LMS',
+        description: 'A complete Learning Management System with separate client and server repositories, featuring user authentication, course management, and interactive dashboards for a seamless online learning experience.',
         category: ['featured', 'web'],
-        tech: ['Next.js', 'Socket.io', 'PostgreSQL', 'Redis'],
-        stars: 234,
-        forks: 45,
+        tech: ['Next.js', 'TypeScript', 'NestJS', 'Tailwind CSS', 'Prisma', 'PostgreSQL'],
+        stars: 0,
+        forks: 0,
         language: 'TypeScript',
         languageColor: '#3178C6',
-        github: 'https://github.com/devconnect/platform',
-        githubRepo: 'devconnect/platform',
-        demo: 'https://devconnect.demo.com',
-        lines: '15.2K',
-        commits: '234',
+        github: 'https://github.com/Haritha0705/etutor_lms_clientSide',
+        githubRepo: 'Haritha0705/etutor_lms_clientSide',
+        demo: null,
+        lines: '12K+',
+        commits: '150+',
+        images: [],
+        readme: `## E-Tutor LMS
+
+A complete **Learning Management System** with separate client and server repositories.
+
+### Key Features
+
+- User authentication and role-based access control
+- Course creation and management dashboard
+- Interactive student dashboards with progress tracking
+- Responsive design for all devices
+
+### Architecture
+
+The project follows a **monorepo-inspired** structure with decoupled client and server:
+
+- **Client**: Built with Next.js and TypeScript, styled with Tailwind CSS
+- **Server**: NestJS API with Prisma ORM connected to PostgreSQL
+
+### Tech Stack
+
+| Layer | Technology |
+|---|---|
+| Frontend | Next.js, TypeScript, Tailwind CSS |
+| Backend | NestJS, Prisma ORM |
+| Database | PostgreSQL |
+`,
     },
     {
         id: 2,
-        title: 'AI Code Reviewer',
-        description: 'ML-powered code review assistant that provides intelligent suggestions and detects potential bugs.',
-        category: ['featured', 'api'],
-        tech: ['Python', 'FastAPI', 'TensorFlow', 'Docker'],
-        stars: 567,
-        forks: 89,
-        language: 'Python',
-        languageColor: '#3776AB',
-        github: 'https://github.com/ai/reviewer',
-        githubRepo: 'ai/reviewer',
+        title: 'Library Management System',
+        description: 'Web-based application for managing books, inventory, borrowing records, and member details, built with modern full-stack frameworks for libraries and educational institutions.',
+        category: ['featured', 'web', 'api'],
+        tech: ['React', 'TypeScript', 'Node.js', 'Vite', 'Tailwind CSS', 'MongoDB', 'PostgreSQL'],
+        stars: 0,
+        forks: 0,
+        language: 'TypeScript',
+        languageColor: '#3178C6',
+        github: 'https://github.com/Haritha0705/library_management_system',
+        githubRepo: 'Haritha0705/library_management_system',
         demo: null,
-        lines: '8.7K',
-        commits: '156',
+        lines: '10K+',
+        commits: '120+',
+        images: [],
+        readme: `## Library Management System
+
+A web-based application for managing books, inventory, borrowing records, and member details.
+
+### Key Features
+
+- Book catalog with search and filtering
+- Member registration and management
+- Borrowing and return tracking with due dates
+- Admin panel with inventory analytics
+
+### Tech Stack
+
+| Layer | Technology |
+|---|---|
+| Frontend | React, TypeScript, Vite, Tailwind CSS |
+| Backend | Node.js, TypeScript, Express |
+| Database | MongoDB, PostgreSQL |
+
+### API Documentation
+
+Full REST API documentation is available via the linked API docs.
+`,
     },
     {
         id: 3,
-        title: 'TaskFlow API',
-        description: 'RESTful API for task management with advanced filtering, real-time updates, and team collaboration.',
-        category: ['api'],
-        tech: ['Node.js', 'Express', 'MongoDB', 'JWT'],
-        stars: 189,
-        forks: 34,
-        language: 'JavaScript',
-        languageColor: '#F7DF1E',
-        github: 'https://github.com/taskflow/api',
-        githubRepo: 'taskflow/api',
-        demo: 'https://taskflow.demo.com',
-        lines: '6.3K',
-        commits: '98',
+        title: 'Mobile Fitness App',
+        description: 'A cross-platform mobile app for tracking workouts, monitoring fitness progress, and syncing data across devices, designed with an intuitive user interface.',
+        category: ['featured', 'mobile'],
+        tech: ['Dart', 'Flutter'],
+        stars: 0,
+        forks: 0,
+        language: 'Dart',
+        languageColor: '#00B4AB',
+        github: 'https://github.com/Haritha0705/workout_planner_app',
+        githubRepo: 'Haritha0705/workout_planner_app',
+        demo: null,
+        lines: '5K+',
+        commits: '60+',
+        images: [],
+        readme: `## Mobile Fitness App
+
+A cross-platform mobile application for tracking workouts and monitoring fitness progress.
+
+### Key Features
+
+- Workout logging with custom exercise support
+- Progress charts and fitness analytics
+- Cross-device data synchronization
+- Intuitive, gesture-driven UI
+
+### Tech Stack
+
+| Layer | Technology |
+|---|---|
+| Framework | Flutter |
+| Language | Dart |
+| State Mgmt | Provider |
+`,
     },
     {
         id: 4,
-        title: 'Design System Kit',
-        description: 'Comprehensive React component library with 50+ customizable components and theming support.',
-        category: ['web'],
-        tech: ['React', 'TypeScript', 'Storybook', 'Tailwind'],
-        stars: 423,
-        forks: 67,
+        title: 'Student Management System',
+        description: 'A robust full-stack student management system for handling student records, attendance, and academic performance with an efficient and user-friendly interface.',
+        category: ['web', 'api'],
+        tech: ['React', 'TypeScript', 'Node.js', 'Vite', 'Tailwind CSS', 'MongoDB'],
+        stars: 0,
+        forks: 0,
         language: 'TypeScript',
         languageColor: '#3178C6',
-        github: 'https://github.com/design/system-kit',
-        githubRepo: 'design/system-kit',
-        demo: 'https://designkit.demo.com',
-        lines: '12.1K',
-        commits: '189',
+        github: 'https://github.com/Haritha0705/Student-Management-System',
+        githubRepo: 'Haritha0705/Student-Management-System',
+        demo: null,
+        lines: '6K+',
+        commits: '80+',
+        images: [],
+        readme: `## Student Management System
+
+A full-stack system designed to handle student records, attendance, and academic performance.
+
+### Key Features
+
+- Student CRUD operations with validation
+- Attendance tracking and reporting
+- Academic performance dashboard
+- Role-based access for admins and teachers
+
+### Tech Stack
+
+| Layer | Technology |
+|---|---|
+| Frontend | React, TypeScript, Vite, Tailwind CSS |
+| Backend | Node.js, TypeScript, Express |
+| Database | MongoDB |
+`,
     },
     {
         id: 5,
-        title: 'WeatherPulse',
-        description: 'Beautiful weather dashboard with interactive maps, forecasts, and location-based alerts.',
-        category: ['web'],
-        tech: ['React', 'Leaflet', 'OpenWeather API', 'Chart.js'],
-        stars: 145,
-        forks: 28,
-        language: 'JavaScript',
-        languageColor: '#F7DF1E',
-        github: 'https://github.com/weather/pulse',
-        githubRepo: 'weather/pulse',
-        demo: 'https://weatherpulse.demo.com',
-        lines: '4.5K',
-        commits: '67',
+        title: 'Courier Delivery Management System',
+        description: 'Console-based courier delivery system with admin controls for agents and packages, delivery tracking, and customer search by tracking ID. Built with OOP principles and file handling.',
+        category: ['api'],
+        tech: ['Java', 'OOP', 'File I/O'],
+        stars: 0,
+        forks: 0,
+        language: 'Java',
+        languageColor: '#B07219',
+        github: 'https://github.com/Haritha0705/Courier-Delivery-Management-System-Java-Console-App',
+        githubRepo: 'Haritha0705/Courier-Delivery-Management-System-Java-Console-App',
+        demo: null,
+        lines: '3K+',
+        commits: '40+',
+        images: [],
+        readme: `## Courier Delivery Management System
+
+A console-based courier delivery application built with core Java and OOP principles.
+
+### Key Features
+
+- Admin controls for managing agents and packages
+- Delivery status tracking with real-time updates
+- Customer search by tracking ID
+- File-based data persistence
+
+### Design Principles
+
+- Object-Oriented Programming with encapsulation and inheritance
+- Clean separation of concerns
+- File I/O for persistent storage
+`,
     },
     {
         id: 6,
-        title: 'DevMetrics Analytics',
-        description: 'Developer productivity analytics platform with GitHub integration and insights dashboard.',
+        title: 'Developer Portfolio',
+        description: 'This portfolio — a modern, responsive single-page application with dark/light themes, live GitHub heatmap, command palette, and animated sections.',
         category: ['featured', 'web'],
-        tech: ['Next.js', 'D3.js', 'Supabase', 'GitHub API'],
-        stars: 312,
-        forks: 52,
+        tech: ['Next.js', 'TypeScript', 'MUI', 'Framer Motion', 'Tailwind CSS'],
+        stars: 0,
+        forks: 0,
         language: 'TypeScript',
         languageColor: '#3178C6',
-        github: 'https://github.com/devmetrics/analytics',
-        githubRepo: 'devmetrics/analytics',
-        demo: 'https://devmetrics.demo.com',
-        lines: '9.8K',
-        commits: '145',
+        github: 'https://github.com/Haritha0705/portfolio-v2',
+        githubRepo: 'Haritha0705/portfolio-v2',
+        demo: null,
+        lines: '8K+',
+        commits: '100+',
+        images: [],
+        readme: `## Developer Portfolio
+
+A modern, responsive single-page application showcasing projects, skills, and experience.
+
+### Key Features
+
+- Dark and light theme with persistent toggle
+- Live GitHub contribution heatmap
+- Command palette with Cmd+K navigation
+- Animated sections with Framer Motion
+- EmailJS-powered contact form
+- Docker-ready production build
+
+### Tech Stack
+
+| Layer | Technology |
+|---|---|
+| Framework | Next.js 16, React 19 |
+| Language | TypeScript 5 |
+| UI Library | Material UI 7 |
+| Animation | Framer Motion 12 |
+| Styling | Tailwind CSS 4, Emotion |
+| Deploy | Docker, Vercel |
+`,
     },
 ];
 
@@ -373,26 +513,26 @@ interface TimelineItem {
 
 export const timeline: TimelineItem[] = [
     {
+        type: 'education',
+        icon: SchoolIcon,
+        title: 'BSc (Hons) Software Engineering',
+        company: 'University of Westminster (via IIT)',
+        period: 'Jan 2025 - Sep 2028 (Expected)',
+        current: true,
+        description:
+            'Undergraduate specializing in Full Stack Development, Cloud Computing, and Software Architecture with a strong foundation in algorithms, data structures, and OOP.',
+        achievements: [],
+    },
+    {
         type: 'experience',
         icon: WorkIcon,
         title: 'React Developer Intern',
         company: 'Ceylon Edge',
         period: 'Jul 2025 - Present',
-        current: true,
+        current: false,
         description:
             'Contributing to dynamic web applications using React.js, enhancing UI/UX, and collaborating\n' +
             'with the team on real-world projects to build scalable frontend solutions.',
-        achievements: [],
-    },
-    {
-        type: 'education',
-        icon: SchoolIcon,
-        title: 'BSc Software Engineering',
-        company: 'University of Westminster',
-        period: '2025 - 2028 (Expected)',
-        current: true,
-        description:
-            '2nd Year student. Specializing in Full Stack Development, Cloud Computing, and Software Architecture.',
         achievements: [],
     },
     {
@@ -410,7 +550,7 @@ export const timeline: TimelineItem[] = [
         icon: AccountBalanceIcon,
         title: 'High School Diploma',
         company: 'St. Aloysius College',
-        period: '2009 - 2022',
+        period: '2008 - 2022',
         current: false,
         description: '',
         achievements: [],
@@ -440,10 +580,10 @@ export const footerLinks: FooterLink[] = [
 ];
 
 export const socialLinksFooter: SocialLinkFooter[] = [
-    { icon: GitHubIcon, href: 'https://github.com', label: 'GitHub' },
-    { icon: LinkedInIcon, href: 'https://linkedin.com', label: 'LinkedIn' },
+    { icon: GitHubIcon, href: 'https://github.com/Haritha0705', label: 'GitHub' },
+    { icon: LinkedInIcon, href: 'https://linkedin.com/in/haritha-wickremesinghe', label: 'LinkedIn' },
     { icon: TwitterIcon, href: 'https://twitter.com', label: 'Twitter' },
-    { icon: EmailIcon, href: 'mailto:haritha@example.com', label: 'Email' },
+    { icon: EmailIcon, href: 'mailto:harithawikramasinha2003@gmail.com', label: 'Email' },
 ];
 
 // GitHubActivity Section Interface

@@ -225,8 +225,8 @@ export default function Hero() {
                                 color: theme.palette.text.secondary,
                             }}
                         >
-                            Crafting immersive digital experiences at the intersection of design and code.
-                            Specializing in React, TypeScript, and scalable systems.
+                            Software Engineering undergraduate at IIT, currently interning as a React Developer.
+                            Building scalable full-stack applications with React, Next.js, Node.js, and TypeScript.
                         </Typography>
 
                         {/* ---------------- CTA Buttons ---------------- */}
