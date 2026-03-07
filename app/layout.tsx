@@ -48,10 +48,10 @@ export default function RootLayout({
       </head>
       <body>
         <AppRouterCacheProvider>
-            <Analytics/>
             <AppThemeProvider>
                 {children}
             </AppThemeProvider>
+            <Analytics />
         </AppRouterCacheProvider>
       </body>
     </html>
