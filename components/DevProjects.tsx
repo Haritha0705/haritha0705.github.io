@@ -23,6 +23,8 @@ import CallSplitIcon from '@mui/icons-material/CallSplit';
 import TerminalIcon from '@mui/icons-material/Terminal';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import { filters, projects } from '@/data/content';
 
 const MotionBox = motion.create(Box);
@@ -30,13 +32,19 @@ const MotionBox = motion.create(Box);
 export default function DevProjects() {
     const [activeFilter, setActiveFilter] = useState('all');
     const [hovered, setHovered] = useState<number | null>(null);
+    const [showAll, setShowAll] = useState(false);
     const router = useRouter();
     const theme = useTheme();
+
+    const INITIAL_COUNT = 6;
 
     const filtered =
         activeFilter === 'all'
             ? projects
             : projects.filter((p) => p.category.includes(activeFilter));
+
+    const displayProjects = showAll ? filtered : filtered.slice(0, INITIAL_COUNT);
+    const hasMore = filtered.length > INITIAL_COUNT;
 
     return (
         <Box
@@ -75,7 +83,7 @@ export default function DevProjects() {
                     {filters.map((f) => (
                         <MotionBox key={f.id} whileHover={{ scale: 1.05 }}>
                             <Button
-                                onClick={() => setActiveFilter(f.id)}
+                                onClick={() => { setActiveFilter(f.id); setShowAll(false); }}
                                 size="small"
                                 sx={{
                                     fontFamily: 'monospace',
@@ -107,7 +115,7 @@ export default function DevProjects() {
                         exit={{ opacity: 0, y: -20 }}
                     >
                         <Grid container spacing={3}>
-                            {filtered.map((p, i) => (
+                            {displayProjects.map((p, i) => (
                                 <Grid size={{xs: 12 ,sm: 6 ,lg: 4}} key={p.id}>
                                     <MotionBox
                                         initial={{ opacity: 0, y: 20 }}
@@ -186,6 +194,38 @@ export default function DevProjects() {
                                 </Grid>
                             ))}
                         </Grid>
+
+                        {/* Project count & Show More/Less */}
+                        <Stack alignItems="center" spacing={2} mt={4}>
+                            <Typography fontFamily="monospace" fontSize={{ xs: 11, sm: 13 }} color="text.secondary">
+                                Showing {displayProjects.length} of {filtered.length} projects
+                            </Typography>
+
+                            {hasMore && (
+                                <MotionBox whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                                    <Button
+                                        onClick={() => setShowAll(!showAll)}
+                                        variant="outlined"
+                                        endIcon={showAll ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+                                        sx={{
+                                            fontFamily: 'monospace',
+                                            fontSize: { xs: 12, sm: 13 },
+                                            textTransform: 'none',
+                                            px: 3,
+                                            py: 1,
+                                            borderColor: theme.palette.primary.main,
+                                            color: theme.palette.primary.main,
+                                            '&:hover': {
+                                                borderColor: theme.palette.primary.main,
+                                                bgcolor: theme.palette.primary.main + '12',
+                                            },
+                                        }}
+                                    >
+                                        {showAll ? 'Show Less' : `View All ${filtered.length} Projects`}
+                                    </Button>
+                                </MotionBox>
+                            )}
+                        </Stack>
                     </MotionBox>
                 </AnimatePresence>
             </Container>

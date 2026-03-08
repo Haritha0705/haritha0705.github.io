@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { usePathname, useRouter } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
     AppBar,
@@ -23,6 +24,8 @@ const MotionBox = motion.create(Box);
 
 export default function Navigation({ toggleTheme }: { toggleTheme: () => void }) {
     const theme = useTheme();
+    const pathname = usePathname();
+    const router = useRouter();
 
     const [scrolled, setScrolled] = useState(false);
     const [mobileOpen, setMobileOpen] = useState(false);
@@ -60,6 +63,14 @@ export default function Navigation({ toggleTheme }: { toggleTheme: () => void })
     }, []);
 
     const scrollTo = (id: string) => {
+        setMobileOpen(false);
+
+        // If we're not on the homepage, navigate there with hash
+        if (pathname !== '/') {
+            router.push(`/#${id}`);
+            return;
+        }
+
         const el = document.getElementById(id);
         if (!el) return;
 
@@ -67,8 +78,6 @@ export default function Navigation({ toggleTheme }: { toggleTheme: () => void })
             top: el.offsetTop - 80,
             behavior: 'smooth',
         });
-
-        setMobileOpen(false);
     };
 
     return (

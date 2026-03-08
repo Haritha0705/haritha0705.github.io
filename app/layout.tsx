@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v15-appRouter';
 import AppThemeProvider from "@/theme/ThemeProvider";
+import AppShell from "@/components/AppShell";
 import { Analytics } from "@vercel/analytics/next"
 import "./globals.css";
 
@@ -50,7 +51,9 @@ export default function RootLayout({
         <AppRouterCacheProvider>
             <Analytics/>
             <AppThemeProvider>
-                {children}
+                <AppShell>
+                    {children}
+                </AppShell>
             </AppThemeProvider>
         </AppRouterCacheProvider>
       </body>

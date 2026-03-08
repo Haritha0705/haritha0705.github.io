@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from 'react';
+import { usePathname, useRouter } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
     Box,
@@ -20,6 +21,8 @@ const MotionBox = motion.create(Box);
 
 export default function Footer() {
     const theme = useTheme();
+    const pathname = usePathname();
+    const router = useRouter();
     const currentYear = new Date().getFullYear();
     const [showScrollTop, setShowScrollTop] = useState(false);
 
@@ -32,11 +35,22 @@ export default function Footer() {
     }, []);
 
     const scrollToTop = () => {
+        if (pathname !== '/') {
+            router.push('/');
+            return;
+        }
         window.scrollTo({ top: 0, behavior: 'smooth' });
     };
 
     const scrollToSection = (href: string) => {
         const sectionId = href.replace('#', '');
+
+        // If we're not on the homepage, navigate there with hash
+        if (pathname !== '/') {
+            router.push(`/#${sectionId}`);
+            return;
+        }
+
         const element = document.getElementById(sectionId);
         if (element) {
             const offset = 80;

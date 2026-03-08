@@ -13,6 +13,8 @@ import {
 } from "@mui/material";
 import OpenInNewIcon from "@mui/icons-material/OpenInNew";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import MediumIcon from "@/components/ui/MediumIcon";
 
 const MotionBox = motion.create(Box);
@@ -111,7 +113,10 @@ function formatDate(dateStr: string): string {
 export default function BlogPosts() {
     const [posts, setPosts] = useState<BlogPost[]>([]);
     const [loading, setLoading] = useState(true);
+    const [showAll, setShowAll] = useState(false);
     const theme = useTheme();
+
+    const INITIAL_COUNT = 6;
 
     useEffect(() => {
         async function fetchFeed() {
@@ -133,7 +138,8 @@ export default function BlogPosts() {
         fetchFeed();
     }, []);
 
-    const displayPosts = useMemo(() => posts.slice(0, 6), [posts]);
+    const displayPosts = useMemo(() => showAll ? posts : posts.slice(0, INITIAL_COUNT), [posts, showAll]);
+    const hasMore = posts.length > INITIAL_COUNT;
 
     return (
         <Box
@@ -432,22 +438,53 @@ export default function BlogPosts() {
                         viewport={{ once: true }}
                         sx={{ textAlign: "center", mt: { xs: 4, md: 5 } }}
                     >
-                        <Button
-                            variant="outlined"
-                            href="https://medium.com/@harithawikramasinha2003"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            startIcon={<MediumIcon />}
-                            sx={{
-                                fontFamily: "monospace",
-                                fontSize: 13,
-                                textTransform: "none",
-                                px: 3,
-                                py: 1,
-                            }}
-                        >
-                            Read more on Medium
-                        </Button>
+                        <Stack alignItems="center" spacing={2}>
+                            <Typography fontFamily="monospace" fontSize={{ xs: 11, sm: 13 }} color="text.secondary">
+                                Showing {displayPosts.length} of {posts.length} posts
+                            </Typography>
+
+                            {hasMore && (
+                                <MotionBox whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                                    <Button
+                                        onClick={() => setShowAll(!showAll)}
+                                        variant="outlined"
+                                        endIcon={showAll ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+                                        sx={{
+                                            fontFamily: "monospace",
+                                            fontSize: 13,
+                                            textTransform: "none",
+                                            px: 3,
+                                            py: 1,
+                                            borderColor: theme.palette.primary.main,
+                                            color: theme.palette.primary.main,
+                                            "&:hover": {
+                                                borderColor: theme.palette.primary.main,
+                                                bgcolor: theme.palette.primary.main + "12",
+                                            },
+                                        }}
+                                    >
+                                        {showAll ? "Show Less" : `View All ${posts.length} Posts`}
+                                    </Button>
+                                </MotionBox>
+                            )}
+
+                            <Button
+                                variant="outlined"
+                                href="https://medium.com/@harithawikramasinha2003"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                startIcon={<MediumIcon />}
+                                sx={{
+                                    fontFamily: "monospace",
+                                    fontSize: 13,
+                                    textTransform: "none",
+                                    px: 3,
+                                    py: 1,
+                                }}
+                            >
+                                Read more on Medium
+                            </Button>
+                        </Stack>
                     </MotionBox>
                 )}
             </Container>

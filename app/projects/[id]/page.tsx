@@ -27,6 +27,7 @@ import FolderOpenIcon from '@mui/icons-material/FolderOpen';
 import InsertDriveFileOutlinedIcon from '@mui/icons-material/InsertDriveFileOutlined';
 import DescriptionOutlinedIcon from '@mui/icons-material/DescriptionOutlined';
 import { projects } from '@/data/content';
+import Footer from '@/components/Footer';
 
 const MotionBox = motion.create(Box);
 
@@ -264,7 +265,7 @@ export default function ProjectDetailPage() {
 
     if (!project) {
         return (
-            <Box sx={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', bgcolor: theme.palette.background.default }}>
+            <Box sx={{ minHeight: '100vh', pt: { xs: 8, sm: 10 }, display: 'flex', alignItems: 'center', justifyContent: 'center', bgcolor: theme.palette.background.default }}>
                 <Stack alignItems="center" spacing={2}>
                     <Typography variant="h5" color="text.secondary">Project not found</Typography>
                     <Button variant="outlined" startIcon={<ArrowBackIcon />} onClick={() => router.push('/#projects')}>
@@ -278,16 +279,13 @@ export default function ProjectDetailPage() {
     const fileTree = getFileTree(project);
 
     return (
-        <Box sx={{ minHeight: '100vh', bgcolor: theme.palette.background.default, pb: { xs: 6, md: 10 } }}>
-            {/* Top bar */}
+        <>
+        <Box sx={{ minHeight: '100vh', bgcolor: theme.palette.background.default, pt: { xs: 8, sm: 10 }, pb: { xs: 6, md: 10 } }}>
+            {/* Breadcrumb bar */}
             <Box
                 sx={{
-                    position: 'sticky',
-                    top: 0,
-                    zIndex: 1100,
                     bgcolor: theme.palette.background.paper,
                     borderBottom: `1px solid ${theme.palette.divider}`,
-                    backdropFilter: 'blur(12px)',
                 }}
             >
                 <Container maxWidth="lg">
@@ -528,6 +526,10 @@ export default function ProjectDetailPage() {
                 </MotionBox>
             </Container>
         </Box>
+
+        {/* Footer */}
+        <Footer />
+        </>
     );
 }
 

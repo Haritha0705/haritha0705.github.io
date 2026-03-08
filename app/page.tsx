@@ -1,12 +1,9 @@
 'use client';
 
+import { useEffect } from 'react';
 import dynamic from 'next/dynamic';
 import { Box, Skeleton } from '@mui/material';
-import { Toaster } from 'sonner';
-import Navigation from '@/components/Navigation';
 import Hero from '@/components/Hero';
-import CommandPalette from '@/components/CommandPalette';
-import { useThemeContext } from '@/theme/ThemeProvider';
 
 // Minimal placeholder while lazy sections load
 const SectionSkeleton = () => (
@@ -26,29 +23,27 @@ const Contact = dynamic(() => import('@/components/Contact'), { loading: Section
 const Footer = dynamic(() => import('@/components/Footer'));
 
 export default function App() {
-    const { toggleTheme } = useThemeContext();
+    // Handle hash-based scrolling when arriving from sub-pages (e.g., /projects/1 → /#projects)
+    useEffect(() => {
+        const hash = window.location.hash.replace('#', '');
+        if (!hash) return;
+
+        // Small delay to let lazy-loaded sections mount
+        const timeout = setTimeout(() => {
+            const el = document.getElementById(hash);
+            if (el) {
+                window.scrollTo({
+                    top: el.offsetTop - 80,
+                    behavior: 'smooth',
+                });
+            }
+        }, 300);
+
+        return () => clearTimeout(timeout);
+    }, []);
 
     return (
-        <Box
-            sx={{
-                minHeight: '100vh',
-                bgcolor: 'background.default',
-                color: 'text.primary',
-            }}
-        >
-            {/* Toast Notifications */}
-            <Toaster
-                position="top-right"
-                theme="system"
-                richColors
-                closeButton
-            />
-
-            {/* Command Palette */}
-            <CommandPalette />
-
-            {/* Navigation */}
-            <Navigation toggleTheme={toggleTheme} />
+        <>
 
             {/* Main Content */}
             <Box component="main">
@@ -64,6 +59,6 @@ export default function App() {
 
             {/* Footer */}
             <Footer />
-        </Box>
+        </>
     );
 }

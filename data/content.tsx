@@ -59,8 +59,8 @@ export interface Stat {
 }
 
 export const stats: Stat[] = [
-    { label: 'Projects', value: '6+' },
-    { label: 'Technologies', value: '20+' },
+    { label: 'Projects', value: '10+' },
+    { label: 'Technologies', value: '25+' },
     { label: 'Experience', value: '1+ Yr' },
 ];
 
@@ -265,18 +265,273 @@ export interface Project {
 
 export const filters: Filter[] = [
     { id: 'all', label: '// All Projects' },
-    { id: 'featured', label: '// Featured' },
     { id: 'web', label: '// Web Apps' },
-    { id: 'api', label: '// APIs' },
+    { id: 'devops', label: '// DevOps' },
     { id: 'mobile', label: '// Mobile' },
 ];
 
 export const projects: Project[] = [
     {
         id: 1,
+        title: 'Nextora – Digital Campus Platform',
+        description: 'A scalable full-stack Progressive Web Application (SDGP group project) addressing university academic and administrative challenges with a modular architecture adaptable for multiple institutions.',
+        category: ['web'],
+        tech: ['Next.js', 'Spring Boot', 'PostgreSQL', 'Material UI', 'PWA'],
+        stars: 0,
+        forks: 0,
+        language: 'TypeScript',
+        languageColor: '#3178C6',
+        github: 'https://github.com/Haritha0705/etutor_lms_clientSide',
+        githubRepo: 'Haritha0705/etutor_lms_clientSide',
+        demo: null,
+        lines: '18K+',
+        commits: '200+',
+        images: [],
+        readme: `## Nextora – Digital Campus Platform
+
+A scalable full-stack **Progressive Web Application** developed as a second-year university group project (SDGP), addressing common academic and administrative management challenges.
+
+### Key Features
+
+- Modular digital campus architecture adaptable for multiple universities
+- Responsive, accessible frontend built with Next.js and Material UI
+- RESTful API layer powered by Spring Boot with PostgreSQL persistence
+- Progressive Web App capabilities for offline-first access
+- Role-based dashboards for students, lecturers, and administrators
+
+### Architecture
+
+The project is split across three repositories:
+
+- **Client** — Next.js + Material UI frontend
+- **Server** — Spring Boot REST API + PostgreSQL
+- **Marketing** — Nextora marketing and landing page site
+
+### Tech Stack
+
+| Layer | Technology |
+|---|---|
+| Frontend | Next.js, Material UI, PWA |
+| Backend | Spring Boot, Java |
+| Database | PostgreSQL |
+| Deployment | Vercel, Render |
+
+### Repositories
+
+- Client: \`etutor_lms_clientSide\`
+- Server: \`etutor_lms_serverSide\`
+- Marketing: \`nextora-marketing-website\`
+`,
+    },
+    {
+        id: 2,
+        title: 'TaskMaster DevOps Platform',
+        description: 'Production-ready task management API with a full DevSecOps pipeline — JWT authentication, Docker containerization, AWS ECS deployment, Terraform infrastructure, and GitHub Actions CI/CD.',
+        category: ['devops'],
+        tech: ['Spring Boot', 'Docker', 'AWS ECS', 'Terraform', 'GitHub Actions', 'JWT'],
+        stars: 0,
+        forks: 0,
+        language: 'Java',
+        languageColor: '#B07219',
+        github: 'https://github.com/Haritha0705',
+        githubRepo: 'Haritha0705/taskmaster-devops',
+        demo: null,
+        lines: '8K+',
+        commits: '90+',
+        images: [],
+        readme: `## TaskMaster DevOps Platform
+
+A production-ready task management API with a complete **DevSecOps** pipeline.
+
+### Key Features
+
+- JWT-based authentication and secure REST APIs
+- Containerized services using Docker
+- Deployed on AWS ECS with production-grade configuration
+- CI/CD automation with GitHub Actions
+- Infrastructure provisioned with Terraform (IaC)
+- Security scanning integrated into the pipeline
+
+### Architecture
+
+\`\`\`
+Client Request
+    |
+    v
+API Gateway --> Spring Boot API --> PostgreSQL
+    |
+    v
+Docker Container --> AWS ECS
+    |
+    v
+Terraform (IaC) <-> GitHub Actions (CI/CD)
+\`\`\`
+
+### Tech Stack
+
+| Layer | Technology |
+|---|---|
+| Backend | Spring Boot, Java |
+| Auth | JWT, Spring Security |
+| Container | Docker |
+| Cloud | AWS ECS, ECR |
+| IaC | Terraform |
+| CI/CD | GitHub Actions |
+
+### DevSecOps Pipeline
+
+1. Code push triggers GitHub Actions workflow
+2. Build and unit tests run automatically
+3. Docker image built and pushed to ECR
+4. Terraform provisions/updates ECS infrastructure
+5. Automated deployment to AWS ECS
+`,
+    },
+    {
+        id: 3,
+        title: 'CloudCart – Microservices E-Commerce',
+        description: 'Enterprise-style e-commerce platform using microservices architecture with independent services for users, products, orders, and payments — containerized with Docker and Kubernetes-ready.',
+        category: ['devops'],
+        tech: ['Microservices', 'Docker', 'Kubernetes', 'API Gateway', 'CI/CD', 'Node.js'],
+        stars: 0,
+        forks: 0,
+        language: 'TypeScript',
+        languageColor: '#3178C6',
+        github: 'https://github.com/Haritha0705',
+        githubRepo: 'Haritha0705/cloudcart',
+        demo: null,
+        lines: '15K+',
+        commits: '130+',
+        images: [],
+        readme: `## CloudCart – Microservices E-Commerce Platform
+
+An enterprise-style e-commerce platform built with a **microservices architecture**.
+
+### Key Features
+
+- Independent services for users, products, orders, and payments
+- API Gateway for unified request routing
+- Containerized services using Docker
+- Kubernetes orchestration for scaling and resilience
+- CI/CD pipelines for automated testing and deployment
+- Service discovery and inter-service communication
+
+### Architecture
+
+\`\`\`
+Client
+  |
+  v
+API Gateway
+  |
+  +---> User Service
+  +---> Product Service
+  +---> Order Service
+  +---> Payment Service
+  |
+  v
+Docker / Kubernetes Cluster
+\`\`\`
+
+### Tech Stack
+
+| Layer | Technology |
+|---|---|
+| Services | Node.js, Express |
+| Gateway | API Gateway |
+| Container | Docker |
+| Orchestration | Kubernetes |
+| CI/CD | GitHub Actions |
+| Communication | REST, Message Queues |
+`,
+    },
+    {
+        id: 4,
+        title: 'Blog Post Application',
+        description: 'Full-stack blog platform using monorepo architecture with a Next.js frontend optimized for performance and a NestJS GraphQL API for creating, editing, and publishing posts.',
+        category: ['web'],
+        tech: ['Next.js', 'NestJS', 'GraphQL', 'TypeScript', 'Monorepo'],
+        stars: 0,
+        forks: 0,
+        language: 'TypeScript',
+        languageColor: '#3178C6',
+        github: 'https://github.com/Haritha0705',
+        githubRepo: 'Haritha0705/blog-post-app',
+        demo: null,
+        lines: '9K+',
+        commits: '85+',
+        images: [],
+        readme: `## Blog Post Application
+
+A full-stack blog platform built with a **monorepo architecture**.
+
+### Key Features
+
+- Performance-optimized Next.js frontend with SSR and ISR
+- GraphQL API powered by NestJS for flexible data querying
+- Create, edit, and publish blog posts with a rich text editor
+- Monorepo structure for shared types, utilities, and configurations
+- Authentication and authorization for authors
+
+### Architecture
+
+The project uses a monorepo approach with shared packages:
+
+- **apps/web** — Next.js frontend application
+- **apps/api** — NestJS GraphQL backend
+- **packages/shared** — Shared TypeScript types and utilities
+
+### Tech Stack
+
+| Layer | Technology |
+|---|---|
+| Frontend | Next.js, TypeScript |
+| Backend | NestJS, GraphQL |
+| Architecture | Monorepo |
+| Language | TypeScript |
+`,
+    },
+    {
+        id: 5,
+        title: 'Library Management System',
+        description: 'Full-stack library management platform for books, inventory, borrowing records, and member management with a React + TypeScript frontend, Node.js backend, and admin panel.',
+        category: ['web'],
+        tech: ['React', 'TypeScript', 'Node.js', 'Vite', 'Tailwind CSS', 'MongoDB', 'PostgreSQL'],
+        stars: 0,
+        forks: 0,
+        language: 'TypeScript',
+        languageColor: '#3178C6',
+        github: 'https://github.com/Haritha0705/library_management_system',
+        githubRepo: 'Haritha0705/library_management_system',
+        demo: null,
+        lines: '10K+',
+        commits: '120+',
+        images: [],
+        readme: `## Library Management System
+
+A full-stack web application for managing books, inventory, borrowing records, and member details.
+
+### Key Features
+
+- Book catalog with search and filtering
+- Member registration and management
+- Borrowing and return tracking with due dates
+- Admin panel with inventory analytics
+
+### Tech Stack
+
+| Layer | Technology |
+|---|---|
+| Frontend | React, TypeScript, Vite, Tailwind CSS |
+| Backend | Node.js, TypeScript, Express |
+| Database | MongoDB, PostgreSQL |
+`,
+    },
+    {
+        id: 6,
         title: 'E-Tutor LMS',
-        description: 'A complete Learning Management System with separate client and server repositories, featuring user authentication, course management, and interactive dashboards for a seamless online learning experience.',
-        category: ['featured', 'web'],
+        description: 'A complete Learning Management System with separate client and server repositories, featuring user authentication, course management, and interactive dashboards for online learning.',
+        category: ['web'],
         tech: ['Next.js', 'TypeScript', 'NestJS', 'Tailwind CSS', 'Prisma', 'PostgreSQL'],
         stars: 0,
         forks: 0,
@@ -301,9 +556,7 @@ A complete **Learning Management System** with separate client and server reposi
 
 ### Architecture
 
-The project follows a **monorepo-inspired** structure with decoupled client and server:
-
-- **Client**: Built with Next.js and TypeScript, styled with Tailwind CSS
+- **Client**: Next.js + TypeScript, styled with Tailwind CSS
 - **Server**: NestJS API with Prisma ORM connected to PostgreSQL
 
 ### Tech Stack
@@ -316,50 +569,10 @@ The project follows a **monorepo-inspired** structure with decoupled client and 
 `,
     },
     {
-        id: 2,
-        title: 'Library Management System',
-        description: 'Web-based application for managing books, inventory, borrowing records, and member details, built with modern full-stack frameworks for libraries and educational institutions.',
-        category: ['featured', 'web', 'api'],
-        tech: ['React', 'TypeScript', 'Node.js', 'Vite', 'Tailwind CSS', 'MongoDB', 'PostgreSQL'],
-        stars: 0,
-        forks: 0,
-        language: 'TypeScript',
-        languageColor: '#3178C6',
-        github: 'https://github.com/Haritha0705/library_management_system',
-        githubRepo: 'Haritha0705/library_management_system',
-        demo: null,
-        lines: '10K+',
-        commits: '120+',
-        images: [],
-        readme: `## Library Management System
-
-A web-based application for managing books, inventory, borrowing records, and member details.
-
-### Key Features
-
-- Book catalog with search and filtering
-- Member registration and management
-- Borrowing and return tracking with due dates
-- Admin panel with inventory analytics
-
-### Tech Stack
-
-| Layer | Technology |
-|---|---|
-| Frontend | React, TypeScript, Vite, Tailwind CSS |
-| Backend | Node.js, TypeScript, Express |
-| Database | MongoDB, PostgreSQL |
-
-### API Documentation
-
-Full REST API documentation is available via the linked API docs.
-`,
-    },
-    {
-        id: 3,
+        id: 7,
         title: 'Mobile Fitness App',
         description: 'A cross-platform mobile app for tracking workouts, monitoring fitness progress, and syncing data across devices, designed with an intuitive user interface.',
-        category: ['featured', 'mobile'],
+        category: ['mobile'],
         tech: ['Dart', 'Flutter'],
         stars: 0,
         forks: 0,
@@ -392,10 +605,10 @@ A cross-platform mobile application for tracking workouts and monitoring fitness
 `,
     },
     {
-        id: 4,
+        id: 8,
         title: 'Student Management System',
         description: 'A robust full-stack student management system for handling student records, attendance, and academic performance with an efficient and user-friendly interface.',
-        category: ['web', 'api'],
+        category: ['web'],
         tech: ['React', 'TypeScript', 'Node.js', 'Vite', 'Tailwind CSS', 'MongoDB'],
         stars: 0,
         forks: 0,
@@ -425,81 +638,6 @@ A full-stack system designed to handle student records, attendance, and academic
 | Frontend | React, TypeScript, Vite, Tailwind CSS |
 | Backend | Node.js, TypeScript, Express |
 | Database | MongoDB |
-`,
-    },
-    {
-        id: 5,
-        title: 'Courier Delivery Management System',
-        description: 'Console-based courier delivery system with admin controls for agents and packages, delivery tracking, and customer search by tracking ID. Built with OOP principles and file handling.',
-        category: ['api'],
-        tech: ['Java', 'OOP', 'File I/O'],
-        stars: 0,
-        forks: 0,
-        language: 'Java',
-        languageColor: '#B07219',
-        github: 'https://github.com/Haritha0705/Courier-Delivery-Management-System-Java-Console-App',
-        githubRepo: 'Haritha0705/Courier-Delivery-Management-System-Java-Console-App',
-        demo: null,
-        lines: '3K+',
-        commits: '40+',
-        images: [],
-        readme: `## Courier Delivery Management System
-
-A console-based courier delivery application built with core Java and OOP principles.
-
-### Key Features
-
-- Admin controls for managing agents and packages
-- Delivery status tracking with real-time updates
-- Customer search by tracking ID
-- File-based data persistence
-
-### Design Principles
-
-- Object-Oriented Programming with encapsulation and inheritance
-- Clean separation of concerns
-- File I/O for persistent storage
-`,
-    },
-    {
-        id: 6,
-        title: 'Developer Portfolio',
-        description: 'This portfolio — a modern, responsive single-page application with dark/light themes, live GitHub heatmap, command palette, and animated sections.',
-        category: ['featured', 'web'],
-        tech: ['Next.js', 'TypeScript', 'MUI', 'Framer Motion', 'Tailwind CSS'],
-        stars: 0,
-        forks: 0,
-        language: 'TypeScript',
-        languageColor: '#3178C6',
-        github: 'https://github.com/Haritha0705/portfolio-v2',
-        githubRepo: 'Haritha0705/portfolio-v2',
-        demo: null,
-        lines: '8K+',
-        commits: '100+',
-        images: [],
-        readme: `## Developer Portfolio
-
-A modern, responsive single-page application showcasing projects, skills, and experience.
-
-### Key Features
-
-- Dark and light theme with persistent toggle
-- Live GitHub contribution heatmap
-- Command palette with Cmd+K navigation
-- Animated sections with Framer Motion
-- EmailJS-powered contact form
-- Docker-ready production build
-
-### Tech Stack
-
-| Layer | Technology |
-|---|---|
-| Framework | Next.js 16, React 19 |
-| Language | TypeScript 5 |
-| UI Library | Material UI 7 |
-| Animation | Framer Motion 12 |
-| Styling | Tailwind CSS 4, Emotion |
-| Deploy | Docker, Vercel |
 `,
     },
 ];

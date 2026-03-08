@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { usePathname, useRouter } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
     Box,
@@ -18,6 +19,8 @@ const MotionBox = motion(Box);
 
 export default function CommandPalette() {
     const theme = useTheme();
+    const pathname = usePathname();
+    const router = useRouter();
 
     const [open, setOpen] = useState(false);
     const [search, setSearch] = useState('');
@@ -30,9 +33,16 @@ export default function CommandPalette() {
     );
 
     const scrollTo = (id: string) => {
-        document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
         setOpen(false);
         setSearch('');
+
+        // If we're not on the homepage, navigate there with hash
+        if (pathname !== '/') {
+            router.push(`/#${id}`);
+            return;
+        }
+
+        document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
     };
 
     /* ---------------- Keyboard shortcuts ---------------- */
