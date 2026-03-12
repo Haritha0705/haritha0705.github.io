@@ -116,6 +116,8 @@ export default function Footer() {
                                             component="a"
                                             href={s.href}
                                             target="_blank"
+                                            rel="noopener noreferrer"
+                                            aria-label={`Visit Haritha Wickremesinghe on ${s.label}`}
                                             sx={{
                                                 border: '1px solid',
                                                 borderColor: theme.palette.divider,

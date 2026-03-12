@@ -84,7 +84,8 @@ export default function Navigation({ toggleTheme }: { toggleTheme: () => void })
         <>
             {/* Navbar */}
             <AppBar
-                component={motion.div}
+                component={motion.nav}
+                aria-label="Main navigation"
                 initial={{ y: -80 }}
                 animate={{ y: 0 }}
                 position="fixed"

@@ -175,9 +175,8 @@ export default function Hero() {
 
                         <Typography
                             variant="h2"
+                            component="h1"
                             sx={{
-                                mt: { xs: 2.5, sm: 2 },
-                                fontWeight: 800,
                                 fontSize: { xs: '2rem', sm: '2.5rem', md: '3rem', lg: '4rem' },
                                 lineHeight: { xs: 1.15, sm: 1.2, md: 1.3 },
                                 background: theme.custom.gradients.text,
@@ -313,6 +312,7 @@ export default function Hero() {
                                     href={link.href}
                                     target={link.href.startsWith('http') ? '_blank' : undefined}
                                     rel="noopener noreferrer"
+                                    aria-label={link.label}
                                     whileHover={{ y: -3, scale: 1.05 }}
                                     whileTap={{ scale: 0.95 }}
                                     style={{

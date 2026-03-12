@@ -6,7 +6,8 @@ import CloudQueueIcon from '@mui/icons-material/CloudQueue';
 import BuildIcon from '@mui/icons-material/Build';
 import GitHubIcon from "@mui/icons-material/GitHub";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
-import TwitterIcon from "@mui/icons-material/Twitter";
+import FacebookIcon from "@mui/icons-material/Facebook";
+import InstagramIcon from "@mui/icons-material/Instagram";
 import EmailIcon from "@mui/icons-material/Email";
 import PhoneIcon from "@mui/icons-material/Phone";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
@@ -45,8 +46,10 @@ export const terminalLines: TerminalLine[] = [
 
 export const socialLinks: SocialLink[] = [
     { icon: GitHubIcon, label: 'GitHub', href: 'https://github.com/Haritha0705' },
-    { icon: LinkedInIcon, label: 'LinkedIn', href: 'https://linkedin.com/in/haritha-wickremesinghe' },
+    { icon: LinkedInIcon, label: 'LinkedIn', href: 'https://www.linkedin.com/in/haritha-wickremesinghe-11ab05271/' },
     { icon: MediumIcon, label: 'Medium', href: 'https://medium.com/@harithawikramasinha2003' },
+    { icon: FacebookIcon, label: 'Facebook', href: 'https://web.facebook.com/haritha.wickremesinghe/' },
+    { icon: InstagramIcon, label: 'Instagram', href: 'https://www.instagram.com/haritha_wickremesinghe/' },
     { icon: MailOutlineIcon, label: 'Email', href: 'mailto:harithawikramasinha2003@gmail.com' },
     { icon: DownloadIcon, label: 'Resume', href: '/Haritha _Wickremesinghe.pdf' },
 ];
@@ -232,9 +235,10 @@ export const contactInfo: ContactItem[] = [
 
 export const socialLinksContact: SocialLinkContact[] = [
     { icon: GitHubIcon, label: "GitHub", href: "https://github.com/Haritha0705" },
-    { icon: LinkedInIcon, label: "LinkedIn", href: "https://linkedin.com/in/haritha-wickremesinghe" },
+    { icon: LinkedInIcon, label: "LinkedIn", href: "https://www.linkedin.com/in/haritha-wickremesinghe-11ab05271/" },
     { icon: MediumIcon, label: "Medium", href: "https://medium.com/@harithawikramasinha2003" },
-    { icon: TwitterIcon, label: "Twitter", href: "https://twitter.com" },
+    { icon: FacebookIcon, label: "Facebook", href: "https://web.facebook.com/haritha.wickremesinghe/" },
+    { icon: InstagramIcon, label: "Instagram", href: "https://www.instagram.com/haritha_wickremesinghe/" },
 ];
 
 // DevProject Page Data and interfaces
@@ -726,9 +730,10 @@ export const footerLinks: FooterLink[] = [
 
 export const socialLinksFooter: SocialLinkFooter[] = [
     { icon: GitHubIcon, href: 'https://github.com/Haritha0705', label: 'GitHub' },
-    { icon: LinkedInIcon, href: 'https://linkedin.com/in/haritha-wickremesinghe', label: 'LinkedIn' },
+    { icon: LinkedInIcon, href: 'https://www.linkedin.com/in/haritha-wickremesinghe-11ab05271/', label: 'LinkedIn' },
     { icon: MediumIcon, href: 'https://medium.com/@harithawikramasinha2003', label: 'Medium' },
-    { icon: TwitterIcon, href: 'https://twitter.com', label: 'Twitter' },
+    { icon: FacebookIcon, href: 'https://web.facebook.com/haritha.wickremesinghe/', label: 'Facebook' },
+    { icon: InstagramIcon, href: 'https://www.instagram.com/haritha_wickremesinghe/', label: 'Instagram' },
     { icon: EmailIcon, href: 'mailto:harithawikramasinha2003@gmail.com', label: 'Email' },
 ];
 

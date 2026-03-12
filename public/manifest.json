@@ -1,0 +1,31 @@
+{
+  "name": "Haritha Wickremesinghe — Full Stack Developer Portfolio",
+  "short_name": "Haritha Dev",
+  "description": "Full Stack Developer portfolio — React, Next.js, TypeScript, Node.js, NestJS, Spring Boot, Docker, Kubernetes. Explore projects, skills, and experience.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0B0B11",
+  "theme_color": "#0B0B11",
+  "orientation": "portrait-primary",
+  "categories": ["portfolio", "technology", "software", "development"],
+  "icons": [
+    {
+      "src": "/icon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/apple-icon.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/favicon.ico",
+      "sizes": "48x48",
+      "type": "image/x-icon"
+    }
+  ]
+}
+

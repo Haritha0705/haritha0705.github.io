@@ -156,6 +156,8 @@ export default function Contact() {
                                         component="a"
                                         href={s.href}
                                         target="_blank"
+                                        rel="noopener noreferrer"
+                                        aria-label={`Visit Haritha Wickremesinghe on ${s.label}`}
                                         sx={{
                                             border: `1px solid ${theme.palette.divider}`,
                                         }}
