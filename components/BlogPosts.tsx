@@ -20,6 +20,9 @@ import MediumIcon from "@/components/ui/MediumIcon";
 const MotionBox = motion.create(Box);
 
 
+const MEDIUM_FEED_URL = 'https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Fmedium.com%2Ffeed%2F%40harithawikramasinha2003';
+
+
 interface BlogPost {
     title: string;
     link: string;
@@ -28,13 +31,6 @@ interface BlogPost {
     thumbnail: string;
     description: string;
     readTime: number;
-}
-
-/** Extract text content from a CDATA or plain XML node */
-function nodeText(el: Element | null): string {
-    if (!el) return "";
-    // CDATA shows up as textContent
-    return (el.textContent ?? "").trim();
 }
 
 /** Strip HTML tags and decode entities */
@@ -50,33 +46,26 @@ function estimateReadTime(html: string): number {
 }
 
 /** Extract first <img> src from HTML content */
-function extractThumbnail(html: string): string {
+function extractThumbnail(html: string, fallback: string): string {
     const match = html.match(/<img[^>]+src=["']([^"']+)["']/);
-    return match?.[1] ?? "";
+    return match?.[1] ?? fallback;
 }
 
-/** Parse Medium RSS XML into BlogPost[] */
-function parseRss(xml: string): BlogPost[] {
-    const parser = new DOMParser();
-    const doc = parser.parseFromString(xml, "application/xml");
-    const items = doc.querySelectorAll("item");
-    const posts: BlogPost[] = [];
-
-    items.forEach((item) => {
-        const title = nodeText(item.querySelector("title"));
-        const link = nodeText(item.querySelector("link"));
-        const pubDate = nodeText(item.querySelector("pubDate"));
-        const categories: string[] = [];
-        item.querySelectorAll("category").forEach((cat) => {
-            categories.push(nodeText(cat));
-        });
-        const encoded =
-            item.getElementsByTagNameNS(
-                "http://purl.org/rss/1.0/modules/content/",
-                "encoded"
-            )[0];
-        const contentHtml = nodeText(encoded);
-        const thumbnail = extractThumbnail(contentHtml);
+/** Parse rss2json response into BlogPost[] */
+function parseRss2Json(data: {
+    items: {
+        title: string;
+        link: string;
+        pubDate: string;
+        categories: string[];
+        thumbnail: string;
+        description: string;
+        content: string;
+    }[];
+}): BlogPost[] {
+    return data.items.map((item) => {
+        const contentHtml = item.content ?? item.description ?? "";
+        const thumbnail = extractThumbnail(contentHtml, item.thumbnail ?? "");
         const plainText = stripHtml(contentHtml);
         const description =
             plainText.length > 160
@@ -84,18 +73,16 @@ function parseRss(xml: string): BlogPost[] {
                 : plainText;
         const readTime = estimateReadTime(contentHtml);
 
-        posts.push({
-            title,
-            link,
-            pubDate,
-            categories,
+        return {
+            title: item.title,
+            link: item.link,
+            pubDate: item.pubDate,
+            categories: item.categories ?? [],
             thumbnail,
             description,
             readTime,
-        });
+        };
     });
-
-    return posts;
 }
 
 function formatDate(dateStr: string): string {
@@ -121,13 +108,13 @@ export default function BlogPosts() {
     useEffect(() => {
         async function fetchFeed() {
             try {
-                const resp = await fetch("/api/medium");
+                const resp = await fetch(MEDIUM_FEED_URL);
                 if (!resp.ok) {
                     console.error("Feed response not ok:", resp.status);
                     return;
                 }
-                const xml = await resp.text();
-                const parsed = parseRss(xml);
+                const data = await resp.json();
+                const parsed = parseRss2Json(data);
                 setPosts(parsed);
             } catch (err) {
                 console.error("Medium RSS Error:", err);

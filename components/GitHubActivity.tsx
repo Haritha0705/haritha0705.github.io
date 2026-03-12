@@ -29,7 +29,10 @@ export default function GitHubActivity() {
     useEffect(() => {
         async function fetchData() {
             try {
-                const resp = await fetch('/api/github');
+                const currentYear = new Date().getFullYear();
+                const resp = await fetch(
+                    `https://github-contributions-api.jogruber.de/v4/Haritha0705?y=${currentYear}`
+                );
                 const json = await resp.json();
                 if (!json?.contributions) return;
                 setContributions(json.contributions);
