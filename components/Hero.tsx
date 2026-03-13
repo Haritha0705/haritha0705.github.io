@@ -6,7 +6,7 @@ import { motion } from 'framer-motion';
 import DownloadIcon from '@mui/icons-material/Download';
 import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
 
-import { terminalLines, socialLinks, SocialLink } from '@/data/content';
+import { terminalLines, socialLinks, SocialLink } from '@/data/hero';
 import StatusBadge from '@/components/ui/BadgeN';
 import Terminal from '@/components/ui/Terminal';
 

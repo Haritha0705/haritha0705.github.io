@@ -184,12 +184,6 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        {/* DNS prefetch for external APIs — browser resolves DNS early */}
-        <link rel="dns-prefetch" href="https://github-contributions-api.jogruber.de" />
-        <link rel="dns-prefetch" href="https://cdn-images-1.medium.com" />
-        <link rel="preconnect" href="https://fonts.googleapis.com" crossOrigin="anonymous" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <meta name="google-site-verification" content="iWUtlGA6kk8mfTbtvo3XyIt0TBuCph2YewvvwBsQtbA" />
 
         {/* JSON-LD Structured Data for SEO */}
         <script

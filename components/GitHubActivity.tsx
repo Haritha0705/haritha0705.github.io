@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo, useRef } from "react";
 import { motion } from "framer-motion";
 
 import {
@@ -24,9 +24,30 @@ const MotionBox = motion.create(Box);
 
 export default function GitHubActivity() {
     const [contributions, setContributions] = useState<ContributionDay[]>([]);
+    const [shouldLoad, setShouldLoad] = useState(false);
+    const sectionRef = useRef<HTMLElement | null>(null);
     const theme = useTheme();
 
     useEffect(() => {
+        const node = sectionRef.current;
+        if (!node || shouldLoad) return;
+
+        const observer = new IntersectionObserver(
+            (entries) => {
+                if (!entries[0]?.isIntersecting) return;
+                setShouldLoad(true);
+                observer.disconnect();
+            },
+            { rootMargin: '300px 0px' }
+        );
+
+        observer.observe(node);
+        return () => observer.disconnect();
+    }, [shouldLoad]);
+
+    useEffect(() => {
+        if (!shouldLoad) return;
+
         async function fetchData() {
             try {
                 const currentYear = new Date().getFullYear();
@@ -41,7 +62,7 @@ export default function GitHubActivity() {
             }
         }
         fetchData();
-    }, []);
+    }, [shouldLoad]);
 
     const total = useMemo(
         () => contributions.reduce((s, d) => s + d.count, 0),
@@ -133,6 +154,7 @@ export default function GitHubActivity() {
     return (
         <Box
             component="section"
+            ref={sectionRef}
             px={{ xs: 2, md: 4 }}
             py={{ xs: 6, md: 8 }}
             bgcolor={theme.palette.background.default}
@@ -146,6 +168,7 @@ export default function GitHubActivity() {
                 >
                     <Typography
                         variant="h4"
+                        component="h2"
                         align="center"
                         fontWeight="bold"
                         mb={1}

@@ -18,11 +18,11 @@ import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
 import LightModeIcon from '@mui/icons-material/LightMode';
-import { navItems } from '@/data/content';
+import { navItems } from '@/data/navigation';
 
 const MotionBox = motion.create(Box);
 
-export default function Navigation({ toggleTheme }: { toggleTheme: () => void }) {
+export default function Navigation({ toggleThemeAction }: { toggleThemeAction: () => void }) {
     const theme = useTheme();
     const pathname = usePathname();
     const router = useRouter();
@@ -144,7 +144,10 @@ export default function Navigation({ toggleTheme }: { toggleTheme: () => void })
                     {/* Right actions */}
                     <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
                         {/* Theme toggle */}
-                        <IconButton onClick={toggleTheme}>
+                        <IconButton
+                            onClick={toggleThemeAction}
+                            aria-label={theme.palette.mode === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+                        >
                             <AnimatePresence mode="wait">
                                 <MotionBox
                                     key={theme.palette.mode}
@@ -161,6 +164,9 @@ export default function Navigation({ toggleTheme }: { toggleTheme: () => void })
                         <IconButton
                             sx={{ display: { md: 'none' } }}
                             onClick={() => setMobileOpen(true)}
+                            aria-label="Open navigation menu"
+                            aria-expanded={mobileOpen}
+                            aria-controls="mobile-navigation-drawer"
                         >
                             <MenuIcon />
                         </IconButton>
@@ -170,6 +176,7 @@ export default function Navigation({ toggleTheme }: { toggleTheme: () => void })
 
             {/* Mobile Drawer */}
             <Drawer
+                id="mobile-navigation-drawer"
                 anchor="right"
                 open={mobileOpen}
                 onClose={() => setMobileOpen(false)}
@@ -185,7 +192,7 @@ export default function Navigation({ toggleTheme }: { toggleTheme: () => void })
             >
                 <Box sx={{ width: '100%', p: { xs: 2, sm: 3 } }}>
                     <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
-                        <IconButton onClick={() => setMobileOpen(false)}>
+                        <IconButton onClick={() => setMobileOpen(false)} aria-label="Close navigation menu">
                             <CloseIcon />
                         </IconButton>
                     </Box>

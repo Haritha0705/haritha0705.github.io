@@ -162,7 +162,7 @@ export default function CommandPalette() {
                                         }}
                                     />
 
-                                    <IconButton size="small" onClick={() => setOpen(false)}>
+                                    <IconButton size="small" onClick={() => setOpen(false)} aria-label="Close command palette">
                                         <Close sx={{ fontSize: { xs: 18, sm: 20 } }} />
                                     </IconButton>
                                 </Box>

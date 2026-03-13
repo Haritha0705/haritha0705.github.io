@@ -87,6 +87,7 @@ export default function Contact() {
                 >
                     <Typography
                         variant="h4"
+                        component="h2"
                         fontWeight={800}
                         sx={{
                             background: theme.custom.gradients.text,

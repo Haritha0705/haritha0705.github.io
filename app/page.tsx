@@ -1,9 +1,7 @@
-'use client';
-
-import { useEffect } from 'react';
 import dynamic from 'next/dynamic';
 import { Box, Skeleton } from '@mui/material';
 import Hero from '@/components/Hero';
+import HashScrollHandler from '@/components/HashScrollHandler';
 
 // Minimal placeholder while lazy sections load
 const SectionSkeleton = () => (
@@ -23,27 +21,9 @@ const Contact = dynamic(() => import('@/components/Contact'), { loading: Section
 const Footer = dynamic(() => import('@/components/Footer'));
 
 export default function App() {
-    // Handle hash-based scrolling when arriving from sub-pages (e.g., /projects/1 → /#projects)
-    useEffect(() => {
-        const hash = window.location.hash.replace('#', '');
-        if (!hash) return;
-
-        // Small delay to let lazy-loaded sections mount
-        const timeout = setTimeout(() => {
-            const el = document.getElementById(hash);
-            if (el) {
-                window.scrollTo({
-                    top: el.offsetTop - 80,
-                    behavior: 'smooth',
-                });
-            }
-        }, 300);
-
-        return () => clearTimeout(timeout);
-    }, []);
-
     return (
         <>
+            <HashScrollHandler />
 
             {/* Main Content */}
             <Box component="main">

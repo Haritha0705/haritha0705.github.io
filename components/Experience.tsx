@@ -28,6 +28,7 @@ export default function Experience() {
                 >
                     <Typography
                         variant="h4"
+                        component="h2"
                         fontWeight="bold"
                         mb={1}
                         sx={{

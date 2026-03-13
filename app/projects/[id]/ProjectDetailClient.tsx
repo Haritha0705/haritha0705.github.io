@@ -289,7 +289,7 @@ export default function ProjectDetailClient({ id }: { id: string }) {
             >
                 <Container maxWidth="lg">
                     <Stack direction="row" alignItems="center" spacing={1.5} py={1.5}>
-                        <IconButton onClick={() => router.push('/#projects')} size="small">
+                        <IconButton onClick={() => router.push('/#projects')} size="small" aria-label="Back to projects">
                             <ArrowBackIcon sx={{ fontSize: 20 }} />
                         </IconButton>
                         <GitHubIcon sx={{ fontSize: 20, color: theme.palette.text.secondary }} />

@@ -3,6 +3,10 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
     output: "export",
 
+    experimental: {
+        optimizePackageImports: ["@mui/material", "@mui/icons-material", "framer-motion"],
+    },
+
     // Smaller response headers
     poweredByHeader: false,
 

@@ -59,6 +59,7 @@ export default function DevProjects() {
                 <MotionBox initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
                     <Typography
                         variant="h4"
+                        component="h2"
                         align="center"
                         fontWeight="bold"
                         mb={1}
@@ -141,11 +142,25 @@ export default function DevProjects() {
 
                                                 <Stack direction="row" spacing={1}>
                                                     {p.demo && (
-                                                        <IconButton size="small" href={p.demo} target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()}>
+                                                        <IconButton
+                                                            size="small"
+                                                            href={p.demo}
+                                                            target="_blank"
+                                                            rel="noopener noreferrer"
+                                                            aria-label={`Open live demo for ${p.title}`}
+                                                            onClick={(e) => e.stopPropagation()}
+                                                        >
                                                             <OpenInNewIcon fontSize="small" />
                                                         </IconButton>
                                                     )}
-                                                    <IconButton size="small" href={p.github} target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()}>
+                                                    <IconButton
+                                                        size="small"
+                                                        href={p.github}
+                                                        target="_blank"
+                                                        rel="noopener noreferrer"
+                                                        aria-label={`Open GitHub repository for ${p.title}`}
+                                                        onClick={(e) => e.stopPropagation()}
+                                                    >
                                                         <GitHubIcon fontSize="small" />
                                                     </IconButton>
                                                 </Stack>

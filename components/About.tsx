@@ -40,6 +40,7 @@ export default function About() {
                 >
                     <Typography
                         variant="h4"
+                        component="h2"
                         fontWeight={800}
                         mb={1}
                         sx={{

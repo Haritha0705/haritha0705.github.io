@@ -39,6 +39,7 @@ export default function CodeSkills() {
                 >
                     <Typography
                         variant="h4"
+                        component="h2"
                         align="center"
                         fontWeight={800}
                         mb={1}

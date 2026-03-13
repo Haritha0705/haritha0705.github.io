@@ -264,6 +264,7 @@ export default function Footer() {
                     >
                         <IconButton
                             onClick={scrollToTop}
+                            aria-label="Scroll back to top"
                             sx={{
                                 backgroundColor: theme.palette.primary.main,
                                 color: '#fff',

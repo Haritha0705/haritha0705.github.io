@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo, useRef } from "react";
 import { motion } from "framer-motion";
 import {
     Box,
@@ -101,11 +101,32 @@ export default function BlogPosts() {
     const [posts, setPosts] = useState<BlogPost[]>([]);
     const [loading, setLoading] = useState(true);
     const [showAll, setShowAll] = useState(false);
+    const [shouldLoad, setShouldLoad] = useState(false);
+    const sectionRef = useRef<HTMLElement | null>(null);
     const theme = useTheme();
 
     const INITIAL_COUNT = 6;
 
     useEffect(() => {
+        const node = sectionRef.current;
+        if (!node || shouldLoad) return;
+
+        const observer = new IntersectionObserver(
+            (entries) => {
+                if (!entries[0]?.isIntersecting) return;
+                setShouldLoad(true);
+                observer.disconnect();
+            },
+            { rootMargin: '300px 0px' }
+        );
+
+        observer.observe(node);
+        return () => observer.disconnect();
+    }, [shouldLoad]);
+
+    useEffect(() => {
+        if (!shouldLoad) return;
+
         async function fetchFeed() {
             try {
                 const resp = await fetch(MEDIUM_FEED_URL);
@@ -123,7 +144,7 @@ export default function BlogPosts() {
             }
         }
         fetchFeed();
-    }, []);
+    }, [shouldLoad]);
 
     const displayPosts = useMemo(() => showAll ? posts : posts.slice(0, INITIAL_COUNT), [posts, showAll]);
     const hasMore = posts.length > INITIAL_COUNT;
@@ -131,6 +152,7 @@ export default function BlogPosts() {
     return (
         <Box
             component="section"
+            ref={sectionRef}
             id="blog"
             py={{ xs: 6, md: 8 }}
             px={{ xs: 2, md: 4 }}
@@ -145,6 +167,7 @@ export default function BlogPosts() {
                 >
                     <Typography
                         variant="h4"
+                        component="h2"
                         align="center"
                         fontWeight="bold"
                         mb={1}
@@ -274,21 +297,23 @@ export default function BlogPosts() {
                                         },
                                     }}
                                 >
-                                    {/* Thumbnail */}
-                                    {post.thumbnail && (
-                                        <Box
-                                            sx={{
-                                                width: "100%",
-                                                height: { xs: 160, sm: 180 },
-                                                overflow: "hidden",
-                                                borderBottom: `1px solid ${theme.palette.divider}`,
-                                            }}
-                                        >
+                                    {/* Thumbnail area is always reserved to prevent layout shifts */}
+                                    <Box
+                                        sx={{
+                                            width: "100%",
+                                            aspectRatio: '16 / 9',
+                                            overflow: "hidden",
+                                            borderBottom: `1px solid ${theme.palette.divider}`,
+                                            bgcolor: theme.palette.action.hover,
+                                        }}
+                                    >
+                                        {post.thumbnail && (
                                             <Box
                                                 component="img"
                                                 src={post.thumbnail}
                                                 alt={post.title}
                                                 loading="lazy"
+                                                decoding="async"
                                                 sx={{
                                                     width: "100%",
                                                     height: "100%",
@@ -297,8 +322,8 @@ export default function BlogPosts() {
                                                     "&:hover": { transform: "scale(1.05)" },
                                                 }}
                                             />
-                                        </Box>
-                                    )}
+                                        )}
+                                    </Box>
 
                                     {/* Content */}
                                     <Box
