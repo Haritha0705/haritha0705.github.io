@@ -1,8 +1,7 @@
 'use client';
 
 import React, { useState, useEffect, useCallback } from 'react';
-import { Box, Typography, useTheme } from '@mui/material';
-import { motion, AnimatePresence } from 'framer-motion';
+import { Box, IconButton, Typography, useTheme } from '@mui/material';
 
 interface TerminalLine {
     type: 'command' | 'output';
@@ -79,14 +78,16 @@ export function Terminal({
                 }}
             >
                 <Box sx={{ display: 'flex', gap: { xs: 0.75, sm: 1 } }}>
-                    <Box
+                    <IconButton
                         onClick={resetTerminal}
+                        aria-label="Reset terminal output"
                         sx={{
                             width: { xs: 10, sm: 12 },
                             height: { xs: 10, sm: 12 },
+                            minWidth: 0,
+                            p: 0,
                             borderRadius: '50%',
                             bgcolor: '#ff5f56',
-                            cursor: 'pointer',
                             '&:hover': { filter: 'brightness(1.2)' },
                         }}
                     />
@@ -125,15 +126,18 @@ export function Terminal({
                     fontSize: { xs: 11, sm: 13 },
                 }}
             >
-                <AnimatePresence>
-                    {displayedLines.map((line, i) => (
-                        <motion.div
+                {displayedLines.map((line, i) => (
+                        <Box
                             key={i}
-                            initial={{ opacity: 0, y: 10 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            exit={{ opacity: 0 }}
-                            transition={{ duration: 0.3 }}
-                            style={{ marginBottom: 6 }}
+                            sx={{
+                                mb: 0.75,
+                                opacity: 0,
+                                animation: 'terminalLineIn 200ms ease-out forwards',
+                                '@keyframes terminalLineIn': {
+                                    from: { opacity: 0, transform: 'translateY(6px)' },
+                                    to: { opacity: 1, transform: 'translateY(0)' },
+                                },
+                            }}
                         >
                             {line.type === 'command' ? (
                                 <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.75 }}>
@@ -147,18 +151,24 @@ export function Terminal({
                                     {line.text}
                                 </Typography>
                             )}
-                        </motion.div>
+                        </Box>
                     ))}
-                </AnimatePresence>
 
                 {/* Typing indicator */}
                 {isTyping && currentIndex < lines.length && (
                     <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.75, mt: 0.5 }}>
                         <Typography sx={{ color: theme.palette.primary.main, fontSize: { xs: 11, sm: 13 } }}>❯</Typography>
-                        <motion.div
-                            animate={{ opacity: [1, 0.5, 1] }}
-                            transition={{ duration: 0.8, repeat: Infinity }}
-                            style={{ width: 8, height: 14, backgroundColor: theme.palette.success.main }}
+                        <Box
+                            sx={{
+                                width: 8,
+                                height: 14,
+                                bgcolor: theme.palette.success.main,
+                                animation: 'terminalBlink 0.8s infinite',
+                                '@keyframes terminalBlink': {
+                                    '0%, 100%': { opacity: 1 },
+                                    '50%': { opacity: 0.5 },
+                                },
+                            }}
                         />
                     </Box>
                 )}

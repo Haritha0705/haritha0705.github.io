@@ -266,7 +266,7 @@ export default function ProjectDetailClient({ id }: { id: string }) {
         return (
             <Box sx={{ minHeight: '100vh', pt: { xs: 8, sm: 10 }, display: 'flex', alignItems: 'center', justifyContent: 'center', bgcolor: theme.palette.background.default }}>
                 <Stack alignItems="center" spacing={2}>
-                    <Typography variant="h5" color="text.secondary">Project not found</Typography>
+                    <Typography variant="h5" component="h1" color="text.secondary">Project not found</Typography>
                     <Button variant="outlined" startIcon={<ArrowBackIcon />} onClick={() => router.push('/#projects')}>
                         Back to Projects
                     </Button>
@@ -325,7 +325,7 @@ export default function ProjectDetailClient({ id }: { id: string }) {
                     >
                         <Stack direction="row" alignItems="center" spacing={1.5}>
                             <FolderOpenIcon sx={{ color: theme.palette.secondary.main }} />
-                            <Typography variant="h5" sx={{ fontWeight: 700, fontSize: { xs: 20, sm: 26 } }}>
+                            <Typography variant="h5" component="h1" sx={{ fontWeight: 700, fontSize: { xs: 20, sm: 26 } }}>
                                 {project.title}
                             </Typography>
                             <Chip

@@ -8,6 +8,16 @@
     "start": "next start",
     "lint": "eslint"
   },
+  "browserslist": {
+    "production": [
+      "defaults and supports es6-module and not dead"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
   "dependencies": {
     "@emailjs/browser": "^4.4.1",
     "@emotion/cache": "^11.14.0",

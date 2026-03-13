@@ -18,7 +18,11 @@ import EmojiEventsIcon from "@mui/icons-material/EmojiEvents";
 import FlashOnIcon from "@mui/icons-material/FlashOn";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
-import { ContributionDay } from '@/data/content';
+
+interface ContributionDay {
+    date: string;
+    count: number;
+}
 
 const MotionBox = motion.create(Box);
 
@@ -117,22 +121,25 @@ export default function GitHubActivity() {
         };
     }, [contributions]);
 
+    // Render only recent half-year to reduce DOM and paint costs.
+    const heatmapSource = useMemo(() => contributions.slice(-182), [contributions]);
+
     const weeks = useMemo(() => {
         const result: ContributionDay[][] = [];
         let week: ContributionDay[] = [];
 
-        contributions.forEach((day, i) => {
+        heatmapSource.forEach((day, i) => {
             const dt = new Date(day.date);
             if (dt.getDay() === 0 && week.length > 0) {
                 result.push(week);
                 week = [];
             }
             week.push(day);
-            if (i === contributions.length - 1) result.push(week);
+            if (i === heatmapSource.length - 1) result.push(week);
         });
 
         return result;
-    }, [contributions]);
+    }, [heatmapSource]);
 
     const getColor = (count: number) => {
         if (count === 0) return theme.palette.background.paper;
@@ -267,10 +274,9 @@ export default function GitHubActivity() {
                                                     height: 11,
                                                     borderRadius: '3px',
                                                     backgroundColor: getColor(day.count),
-                                                    transition: 'transform 0.15s, box-shadow 0.15s',
+                                                    transition: 'box-shadow 0.15s',
                                                     '&:hover': {
-                                                        transform: 'scale(1.8)',
-                                                        boxShadow: `0 0 6px ${getColor(day.count)}`,
+                                                        boxShadow: `0 0 0 1px ${theme.palette.divider}, 0 0 6px ${getColor(day.count)}`,
                                                         zIndex: 1,
                                                     },
                                                 }}
